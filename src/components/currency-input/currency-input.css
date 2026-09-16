@@ -1,0 +1,37 @@
+/* src/components/currency-input/CurrencyInput.css */
+.input-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.input-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background-color: #f8fafc; /* Input içi çok hafif gri */
+  color: var(--text-main);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+/* Giriş alanına tıklandığında renkli ve havalı parlasın */
+.custom-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
