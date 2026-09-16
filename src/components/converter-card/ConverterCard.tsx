@@ -1,18 +1,33 @@
-// src/components/converter-card/ConverterCard.tsx
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store'; 
 import { CurrencyInput } from '../currency-input/CurrencyInput';
 import { CurrencySelect } from '../currency-select/CurrencySelect';
-import { ResultDisplay } from '../result-display/ResultDisplay'; // Yeni bileşeni import ettik
+import { ResultDisplay } from '../result-display/ResultDisplay';
+import { setAmount, setFromCurrency, setToCurrency, swapCurrencies } from '../../store/currencySlice'; // Redux aksiyonları
 import './converter-card.css';
 
 export function ConverterCard() { 
-  const [amount, setAmount] = useState<string>("100");
-  const [fromCurrency, setFromCurrency] = useState<string>("USD");
-  const [toCurrency, setToCurrency] = useState<string>("TRY");
+  const dispatch = useAppDispatch();
+
+  // Redux beynindeki verileri (state) uygulamaya çekiyoruz
+  const amount = useAppSelector((state) => state.currency.amount);
+const fromCurrency = useAppSelector((state) => state.currency.fromCurrency);
+const toCurrency = useAppSelector((state) => state.currency.toCurrency);
+
+  // Aksiyonları tetiklemek (dispatch) için fonksiyonlar
+  const handleAmountChange = (value: string) => {
+    dispatch(setAmount(value));
+  };
+
+  const handleFromChange = (currency: string) => {
+    dispatch(setFromCurrency(currency));
+  };
+
+  const handleToChange = (currency: string) => {
+    dispatch(setToCurrency(currency));
+  };
 
   const handleSwap = () => {
-    setFromCurrency(toCurrency);
-    setToCurrency(fromCurrency);
+    dispatch(swapCurrencies());
   };
 
   return (
@@ -20,18 +35,18 @@ export function ConverterCard() {
       <h1 className="converter-title">Currency Flow</h1> 
 
       {/* Miktar Giriş Alanı */}
-      <CurrencyInput amount={amount} onChangeAmount={setAmount} />
+      <CurrencyInput amount={amount} onChangeAmount={handleAmountChange} />
       
       {/* Döviz Seçim Alanı */}
       <CurrencySelect 
         fromCurrency={fromCurrency}
         toCurrency={toCurrency}
-        onChangeFrom={setFromCurrency}
-        onChangeTo={setToCurrency}
+        onChangeFrom={handleFromChange}
+        onChangeTo={handleToChange}
         onSwap={handleSwap}
       />
 
-      {/* Gerçek Sonuç Ekranı */}
+      {/* Sonuç Ekranı */}
       <ResultDisplay 
         amount={amount}
         fromCurrency={fromCurrency}
