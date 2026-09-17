@@ -15,12 +15,17 @@ export function CurrencySelect({
   onChangeTo,
   onSwap,
 }: CurrencySelectProps) {
-  // Şimdilik sahte döviz listesi (İleride API'den dinamik gelecek)
-  const currencies = ["USD", "TRY", "EUR", "GBP", "JPY", "CAD", "AUD"];
+  
+  const currencies = [
+    "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", 
+    "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "ISK", 
+    "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", 
+    "RON", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"
+  ];
 
   return (
     <div className="select-container">
-      {/* 1. NEREDEN KUTUSU */}
+
       <div className="select-box-group">
         <label className="select-label">Kaynak</label>
         <select
@@ -36,12 +41,10 @@ export function CurrencySelect({
         </select>
       </div>
 
-      {/* 🔄 TAKAS BUTONU */}
       <button className="swap-button" onClick={onSwap} title="Kurları Değiştir">
         🔄
       </button>
 
-      {/* 2. NEREYE KUTUSU */}
       <div className="select-box-group">
         <label className="select-label">Hedef</label>
         <select

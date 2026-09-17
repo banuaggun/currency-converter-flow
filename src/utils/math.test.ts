@@ -26,7 +26,12 @@ export async function runLiveApiIntegrationTest() {
 
   const baseUrl = "https://api.frankfurter.dev/v2/"; 
   const endpoint = "rates?base=";
-  const familyOfCurrencies = ["usd", "try", "eur", "gbp", "jpy", "cad", "aud"];
+  const familyOfCurrencies = [
+  "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", 
+  "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "ISK", 
+  "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", 
+  "RON", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"
+];
 const randomIndex = Math.floor(Math.random() * familyOfCurrencies.length);
 const targetCurrency = familyOfCurrencies[randomIndex];
 

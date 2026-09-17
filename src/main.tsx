@@ -6,9 +6,12 @@ import App from './App'
 import './index.css'
 import { runManualTests, runLiveApiIntegrationTest } from './utils/math.test'
 
-runManualTests();
 
-runLiveApiIntegrationTest();
+if (import.meta.env.DEV) {
+  runManualTests();
+  runLiveApiIntegrationTest();
+}
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
