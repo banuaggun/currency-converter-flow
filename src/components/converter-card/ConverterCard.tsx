@@ -1,43 +1,31 @@
-import { useAppDispatch, useAppSelector } from '../../store'; 
 import { CurrencyInput } from '../currency-input/CurrencyInput';
 import { CurrencySelect } from '../currency-select/CurrencySelect';
 import { ResultDisplay } from '../result-display/ResultDisplay';
-import { setAmount, setFromCurrency, setToCurrency, swapCurrencies } from '../../store/currencySlice'; // Redux aksiyonları
+import { useAppDispatch, useAppSelector, type RootState } from '../../store';
+import { setAmount, setFromCurrency, setToCurrency, swapCurrencies } from '../../store/currencySlice';
+import { useGetLiveRatesQuery } from '../../store/currencyApi'; 
 import './converter-card.css';
 
 export function ConverterCard() { 
   const dispatch = useAppDispatch();
 
-  // Redux beynindeki verileri (state) uygulamaya çekiyoruz
-  const amount = useAppSelector((state) => state.currency.amount);
-const fromCurrency = useAppSelector((state) => state.currency.fromCurrency);
-const toCurrency = useAppSelector((state) => state.currency.toCurrency);
+  const amount = useAppSelector((state: RootState) => state.currency.amount);
+  const fromCurrency = useAppSelector((state: RootState) => state.currency.fromCurrency);
+  const toCurrency = useAppSelector((state: RootState) => state.currency.toCurrency);
 
-  // Aksiyonları tetiklemek (dispatch) için fonksiyonlar
-  const handleAmountChange = (value: string) => {
-    dispatch(setAmount(value));
-  };
+  const { data: rates, isLoading, error } = useGetLiveRatesQuery(fromCurrency);
 
-  const handleFromChange = (currency: string) => {
-    dispatch(setFromCurrency(currency));
-  };
-
-  const handleToChange = (currency: string) => {
-    dispatch(setToCurrency(currency));
-  };
-
-  const handleSwap = () => {
-    dispatch(swapCurrencies());
-  };
+  const handleAmountChange = (value: string) => dispatch(setAmount(value));
+  const handleFromChange = (currency: string) => dispatch(setFromCurrency(currency));
+  const handleToChange = (currency: string) => dispatch(setToCurrency(currency));
+  const handleSwap = () => dispatch(swapCurrencies());
 
   return (
     <div className="converter-card">
       <h1 className="converter-title">Currency Flow</h1> 
 
-      {/* Miktar Giriş Alanı */}
       <CurrencyInput amount={amount} onChangeAmount={handleAmountChange} />
       
-      {/* Döviz Seçim Alanı */}
       <CurrencySelect 
         fromCurrency={fromCurrency}
         toCurrency={toCurrency}
@@ -46,12 +34,23 @@ const toCurrency = useAppSelector((state) => state.currency.toCurrency);
         onSwap={handleSwap}
       />
 
-      {/* Sonuç Ekranı */}
-      <ResultDisplay 
-        amount={amount}
-        fromCurrency={fromCurrency}
-        toCurrency={toCurrency}
-      />
+      {isLoading ? (
+        <div style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--accent-color)', fontWeight: 600 }}>
+          Kurlar Güncelleniyor...
+        </div>
+      ) : error ? (
+        <div style={{ textAlign: 'center', padding: '1.5rem', color: '#ef4444', fontWeight: 600 }}>
+          Kur verisi alınamadı.
+        </div>
+      ) : (
+
+        <ResultDisplay 
+          amount={amount}
+          fromCurrency={fromCurrency}
+          toCurrency={toCurrency}
+          rates={rates || {}} 
+        />
+      )}
     </div>
   );
 }
