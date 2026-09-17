@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector, type RootState } from '../../store';
 import { setAmount, setFromCurrency, setToCurrency, swapCurrencies } from '../../store/currencySlice';
 import { useGetLiveRatesQuery } from '../../store/currencyApi'; 
 import './converter-card.css';
+import { CurrencyChart } from '../currency-chart/CurrencyChart';
 
 export function ConverterCard() { 
   const dispatch = useAppDispatch();
@@ -43,13 +44,17 @@ export function ConverterCard() {
           Kur verisi alınamadı.
         </div>
       ) : (
-
+<>
         <ResultDisplay 
           amount={amount}
           fromCurrency={fromCurrency}
           toCurrency={toCurrency}
           rates={rates || {}} 
-        />
+        /> 
+
+        <CurrencyChart base={fromCurrency} quote={toCurrency} /> 
+
+        </>
       )}
     </div>
   );

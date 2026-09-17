@@ -1,0 +1,68 @@
+.chart-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: #0b0f17; 
+  border-radius: 16px;
+  border: 1px solid #1e293b;
+}
+
+.chart-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #84cc16; 
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.05em;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+}
+
+.chart-polygon {
+  fill: url(#chartGradient); 
+}
+
+.chart-line {
+  fill: none;
+  stroke: #84cc16; 
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0px 0px 8px rgba(132, 204, 22, 0.6)); 
+}
+
+.chart-dot {
+  fill: #0b0f17;
+  stroke: #84cc16;
+  stroke-width: 3;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+@keyframes dotPulse {
+  0% { r: 4; stroke-width: 3; opacity: 1; }
+  50% { r: 7; stroke-width: 5; stroke: #a3e635; opacity: 0.8; }
+  100% { r: 4; stroke-width: 3; opacity: 1; }
+}
+
+.chart-dot:hover {
+  animation: dotPulse 0.8s infinite ease-in-out;
+  fill: #84cc16;
+}
+
+.chart-axis-x {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding: 0 15px;
+  border-top: 1px solid #1e293b;
+}
+
+.chart-date-label {
+  font-size: 0.65rem;
+  color: #64748b;
+  margin-top: 8px;
+  font-weight: 600;
+}
