@@ -1,13 +1,12 @@
-/* src/index.css */
 :root {
-  --bg-color: #f1f5f9;       /* Açık Gri/Mavi Dinamik Arka Plan */
-  --card-bg: #ffffff;        /* Saf Beyaz Kart */
-  --text-main: #0f172a;      /* Koyu Lacivert/Siyah Net Yazılar */
-  --text-muted: #64748b;     /* Yardımcı Yazılar için Tatlı Bir Gri */
-  --accent-color: #4f46e5;   /* Canlı İndigo/Mor (Uygulamaya Renk Katacak Ana Ton) */
-  --accent-light: #eef2ff;   /* İndigo Renginin Çok Açık Hali (Sonuç Arka Planı için) */
-  --border-color: #e2e8f0;   /* Yumuşak ve Belirsiz Çizgiler */
-  --radius: 20px;            /* Daha Modern ve Oval Köşeler */
+  --bg-color: #f1f5f9;       
+  --card-bg: #ffffff;        
+  --text-main: #0f172a;      
+  --text-muted: #64748b;     
+  --accent-color: #4f46e5;   
+  --accent-light: #eef2ff;  
+  --border-color: #e2e8f0;   
+  --radius: 20px;            
 }
 
 body {
@@ -20,3 +19,35 @@ body {
   align-items: center;
   min-height: 100vh;
 }
+
+
+
+.dashboard-container {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px; 
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+.dashboard-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-right {
+  flex: 0.8;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+}
+
