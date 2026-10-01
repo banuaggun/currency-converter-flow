@@ -5,39 +5,72 @@ interface FlagProps {
   className?: string;
   width?: number;
   height?: number;
-  provider?: 'flagsapi' | 'restcountries' | 'cdnjs';
 }
+
+const currencyToCountryMap: Record<string, string> = {
+  USD: "us", 
+  EUR: "eu", 
+  TRY: "tr", 
+  GBP: "gb", 
+  AUD: "au", 
+  BGN: "bg", 
+  BRL: "br", 
+  CAD: "ca", 
+  CHF: "ch", 
+  CNY: "cn", 
+  CZK: "cz", 
+  DKK: "dk", 
+  HKD: "hk", 
+  HUF: "hu", 
+  IDR: "id", 
+  ILS: "il", 
+  INR: "in", 
+  ISK: "is", 
+  JPY: "jp", 
+  KRW: "kr", 
+  MXN: "mx", 
+  MYR: "my", 
+  NOK: "no", 
+  NZD: "nz", 
+  PHP: "ph", 
+  PLN: "pl", 
+  RON: "ro", 
+  RUB: "ru", 
+  SEK: "se", 
+  SGD: "sg", 
+  THB: "th", 
+  ZAR: "za", 
+};
 
 export function Flag({ 
   code, 
   className = "currency-flag", 
   width = 24, 
-  height = 18,
-  provider = "flagsapi" 
+  height = 24 
 }: FlagProps) {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsError(false);
-  }, [code, provider]);
+  }, [code]);
 
   if (!code) return null;
 
-  const cleanCode = code.trim();
-  
-  let flagUrl = "";
-  if (provider === "flagsapi") {
-    flagUrl = `https://flagsapi.com/{$cleanCode}/shiny/${width}.png`;
-  } else if (provider === "restcountries") {
-    flagUrl = `https://restcountries.com{cleanCode.toLowerCase()}.png`;
-  } else if (provider === "cdnjs") {
-    flagUrl = `https://cloudflare.com{cleanCode.toLowerCase()}.svg`;
+  const upperCode = code.trim().toUpperCase();
+  let finalCountryCode = "";
+
+  if (currencyToCountryMap[upperCode]) {
+    finalCountryCode = currencyToCountryMap[upperCode];
+  } else {
+    finalCountryCode = upperCode.slice(0, 2).toLowerCase();
   }
+
+  const flagUrl = "https://flagcdn.io/" + finalCountryCode + ".svg";
 
   const inlineStyle = {
     width: `${width}px`,
     height: `${height}px`,
-    borderRadius: "2px",
+    borderRadius: "24px",
     objectFit: "cover" as const,
     display: "inline-block",
     verticalAlign: "middle"
@@ -58,7 +91,7 @@ export function Flag({
         }}
         className={className}
       >
-        {cleanCode.slice(0, 2).toUpperCase()}
+        {upperCode.slice(0, 2)}
       </div>
     );
   }
@@ -66,11 +99,14 @@ export function Flag({
   return (
     <img
       src={flagUrl}
-      alt={`${code.toUpperCase()} flag`}
+      alt={`${upperCode} flag`}
       style={inlineStyle}
       className={className}
       loading="lazy"
-      onError={() => setIsError(true)}
+      onError={() => {
+        console.error("Flag could not be loaded, falling back to placeholder:", flagUrl);
+        setIsError(true);
+      }}
     />
   );
 }
