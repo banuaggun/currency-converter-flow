@@ -6,6 +6,8 @@ import { useGetLiveRatesQuery } from '../../store/currencyApi';
 import { CurrencyChart } from '../currency-chart/CurrencyChart';
 import './converter-card.css';
 
+const POPULAR_CURRENCIES = new Set(["USD", "EUR", "GBP", "TRY"]);
+
 export function ConverterCard() { 
   const dispatch = useAppDispatch();
 
@@ -25,6 +27,24 @@ export function ConverterCard() {
     ? (parseFloat(amount) * targetRate).toFixed(2) 
     : "0.00";
 
+  const dynamicCurrencies = (() => {
+    if (!rates) return [];
+    
+    const allCodes = Array.from(new Set([fromCurrency.toUpperCase(), ...Object.keys(rates)]));
+
+    return allCodes
+      .map((code) => ({
+        code: code,
+        name: code === "TRY" ? "Turkish Lira" : `${code} Currency`, 
+        isPopular: POPULAR_CURRENCIES.has(code),
+      }))
+      .sort((a, b) => {
+        if (a.isPopular && !b.isPopular) return -1;
+        if (!a.isPopular && b.isPopular) return 1;
+        return a.code.localeCompare(b.code);
+      });
+  })();
+
   return (
     <div className="converter-card">
       <h1 className="converter-title">Currency Flow</h1> 
@@ -37,6 +57,7 @@ export function ConverterCard() {
           onChangeAmount={handleAmountChange}
           selectedCurrency={fromCurrency}
           onChangeCurrency={handleFromChange}
+          currencies={dynamicCurrencies} 
         />
 
         <button className="inline-swap-btn" onClick={handleSwap} title="Kurları Değiştir">
@@ -49,17 +70,18 @@ export function ConverterCard() {
           selectedCurrency={toCurrency}
           onChangeCurrency={handleToChange}
           readOnly={true}
+          currencies={dynamicCurrencies} 
         />
 
       </div>
 
       {isLoading ? (
         <div style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--accent-color)', fontWeight: 600 }}>
-          Kurlar Güncelleniyor...
+          Updating Exchange Rates...
         </div>
       ) : error ? (
         <div style={{ textAlign: 'center', padding: '1.5rem', color: '#ef4444', fontWeight: 600 }}>
-          Kur verisi alınamadı.
+          Failed to fetch exchange rates.
         </div>
       ) : (
         <>
