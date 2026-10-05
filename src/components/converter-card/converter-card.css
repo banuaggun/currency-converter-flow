@@ -2,12 +2,12 @@
   padding: 24px; 
   width: calc(100% - 48px); 
   max-width:400px;
-  margin: 0 auto;
+  margin: 0 auto; 
 } 
 
 .converter-title {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: #000;
+  color: #000; /* add color */
 }
  
 .converter-flex-wrapper {
@@ -25,11 +25,11 @@
   z-index: 10;
   width: 44px;
   height: 44px;
-  background-color: rgb(190, 193, 241);
-  border: none; 
+  background-color: #fff; /* add bg */
+  border: 1px solid #ddd; /* add color */
   outline: 0;
   border-radius: 12px;
-  color: #2c2c2c;
+  color: #2c2c2c; /* add color */
   font-size: 1.25rem;
   cursor: pointer;
   display: flex;
@@ -39,7 +39,7 @@
 }
 
 .inline-swap-btn:hover {
-  background-color: #8c8cf3;
+  background-color: gray; /* add color */
 }
 
 .box-select-container {

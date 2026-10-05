@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
 }
 
 .box-label {
@@ -19,27 +19,24 @@
 }
 
 .box-content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; 
+  flex-direction: column; 
+  align-items:stretch;
+  justify-content: space-between; 
   gap: 1rem;
   position: relative; 
 }
 
 .box-amount-input {
   background: transparent;
-  border: none;
+  border: 1px solid red;
   outline: none;
-  color: #263ca0; 
-  font-size: 2rem;
+  color: #061538; 
+  font-size: 1.1rem;
   font-weight: 700;
-  width: 55%; 
+  width: 100%; 
   padding: 0;
-  margin: 0;
-}
-
-.currency-box.receive .box-amount-input {
-  color: #8d9c4a; 
+  margin: 0; 
 }
 
 .box-amount-input::-webkit-outer-spin-button,
@@ -51,10 +48,15 @@
   -moz-appearance: textfield;
 }
 
+.custom-dropdown-container{
+/*  border:1px solid blue; */
+  display: flex; 
+  justify-content: flex-end; 
+}
 
 .dropdown-trigger-btn {
-  background-color: #ddddf3;
-  border:none; 
+  background-color: #fff; /* add bg */
+  border:1px solid #B0D4CC; 
   outline: 0;
   border-radius: 12px;
   padding: 0.5rem 0.75rem;
@@ -62,7 +64,7 @@
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
-  color: #2e2e2e;
+  color: #000; /* add text color*/
   font-weight: 600;
   font-size: 0.95rem;
   font-family: inherit;
@@ -70,7 +72,7 @@
 }
 
 .dropdown-trigger-btn:hover {
-  background-color: #899cf0;
+  background-color: lightgray; /* add hover bg */
 }
 
 .currency-flag {
@@ -86,14 +88,19 @@
 }
 
 .arrow-icon {
-  color: #71717a;
-  font-size: 0.8rem;
+  color: #71717a; /* add color */
+  width:16px; 
+  height:16px; 
+  display:flex; 
+  align-items: center; 
+  justify-content: center; 
+  transform: rotate(90deg);
   transition: transform 0.2s ease;
 }
 
 .arrow-icon.open {
-  transform: rotate(180deg);
-  color: #ffffff;
+  transform: rotate(270deg);
+  color: darkgray;
 }
 
 .dropdown-menu-panel {
@@ -102,9 +109,9 @@
   top: calc(100% + 10px);
   width: 100%; 
   max-width:400px;
-  background-color: #a9a9f0; 
+  background-color: #fff; /* add bg */
   border-radius: 14px;
-  border: none; 
+  border: 1px solid gray; /* add color */  
   outline: 0;
   box-shadow: 0 12px 30px rgba(182, 179, 179, 0.5);
   z-index: 1000;
@@ -117,7 +124,7 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  background-color: #a9a9f0;
+  background-color: #ddd; /* add bg */
   gap: 0.6rem;
 }
 
@@ -132,24 +139,13 @@
   background: transparent;
   width: 100%;
   font-size: 0.9rem;
-  color: #ffffff;
+  color: #000; /* add color */
   font-family: inherit;
 }
 
 .dropdown-search-input::placeholder {
-  color: #1b1b46;
-}
-
-.shortcut-hint {
-  font-size: 0.7rem;
-  color: #71717a;
-  background-color: #c9c9e2;
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: none; 
-  outline: 0;
-  white-space: nowrap;
-}
+  color: #000; /* add color */
+} 
 
 .options-list-scroll {
   max-height: 260px;
@@ -160,11 +156,11 @@
   width: 6px;
 }
 .options-list-scroll::-webkit-scrollbar-thumb {
-  background-color: #ababcf;
+  background-color: #ababcf; /* add bg */
   border-radius: 3px;
 }
 .options-list-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #ababcf;
+  background-color: #ababcf; /* add bg */
 }
 
 .category-header {
@@ -173,7 +169,7 @@
   padding: 0.75rem 1rem 0.3rem 1rem;
   font-size: 0.7rem;
   font-weight: 700;
-  color: #252566;
+  color: blue; /* add color */
   letter-spacing: 1px;
 }
 
@@ -187,11 +183,11 @@
 }
 
 .currency-option-row:hover {
-  background-color: #5151be;
+  background-color: darkgray; /* add color */
 }
 
 .currency-option-row.selected {
-  background-color: #7777c0;
+  background-color: darkorange; /* add color */
 }
 
 .currency-info-text {
@@ -209,7 +205,7 @@
 }
 
 .currency-name-text {
-  color: #2121a0;
+  color: #000; /* add color */
   font-size: 0.85rem;
   white-space: nowrap;
   overflow: hidden;
@@ -218,7 +214,7 @@
 }
 
 .check-mark {
-  color: #d4f933; 
+  color: red; /* add color */ 
   font-weight: bold;
   font-size: 0.95rem;
 }

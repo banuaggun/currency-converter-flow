@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Flag } from "../ui/flag/Flag"; 
 import "./currency-input.css";
+import { PlayIcon } from "../ui/icons/icons";
 
 interface CurrencyItem {
   code: string;
@@ -75,7 +76,9 @@ export function CurrencyInput({
             onClick={() => setIsOpen(!isOpen)}>
             <Flag code={currentCurrency.code} width={24} height={24} />
             <span className="selected-code">{currentCurrency.code}</span>
-            <span className={`arrow-icon ${isOpen ? "open" : ""}`}>▾</span>
+            <span className={`arrow-icon ${isOpen ? "open" : ""}`}>
+              <PlayIcon />
+            </span>
           </button>
 
           {isOpen && (

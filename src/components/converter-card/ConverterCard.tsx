@@ -5,6 +5,7 @@ import { setAmount, setFromCurrency, setToCurrency, swapCurrencies } from '../..
 import { useGetLiveRatesQuery } from '../../store/currencyApi'; 
 import { CurrencyChart } from '../currency-chart/CurrencyChart';
 import './converter-card.css';
+import { SwitchIcon } from '../ui/icons/icons';
 
 const POPULAR_CURRENCIES = new Set(["USD", "EUR", "GBP", "TRY"]);
 
@@ -60,8 +61,8 @@ export function ConverterCard() {
           currencies={dynamicCurrencies} 
         />
 
-        <button className="inline-swap-btn" onClick={handleSwap} title="Kurları Değiştir">
-          ⇄
+        <button className="inline-swap-btn" onClick={handleSwap} title="Switch Currencies">
+         <SwitchIcon />
         </button>
 
         <CurrencyInput 
