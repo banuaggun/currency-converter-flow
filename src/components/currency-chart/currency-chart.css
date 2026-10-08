@@ -61,3 +61,26 @@
   stroke-dasharray: 4 4; 
   opacity: 0.25; 
 }
+
+
+.timeframe-selector { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding:0 4px;
+  border:1px solid red;
+} 
+
+.timeframe-btn{
+  padding:4px 12px; 
+  border:1px solid #ddd; 
+  background-color: #ffffff; 
+  color:#1e293b;  
+  font-weight: 700; 
+  font-size: 1rem;
+} 
+
+.timeframe-btn.active{
+  background-color: #64748b; 
+  color:#fff;
+}

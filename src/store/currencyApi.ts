@@ -42,7 +42,7 @@ export const currencyApi = createApi({
             (item) => item.quote.toUpperCase() === arg.quote.toUpperCase(),
           )
           .map((item) => ({
-            date: new Date(item.date).toLocaleDateString("tr-TR", {
+            date: new Date(item.date).toLocaleDateString("en-US", {
               day: "numeric",
               month: "short",
             }),

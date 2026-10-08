@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useGetChartRatesQuery } from "../../store/currencyApi";
 import "./currency-chart.css";
+import { MarketStats } from "../market-stats/MarketStats";
 
 interface CurrencyChartProps {
   base: string;
@@ -71,8 +72,17 @@ export function CurrencyChart({ base, quote }: CurrencyChartProps) {
     Eyl: "Sep", Eki: "Oct", Kas: "Nov", Ara: "Dec"
   };
 
+ const lastIndex = chartData.length - 1;
+  const lastRate = chartData[lastIndex]?.rate || 0; 
+
+    const dailyOpenRate = chartData.length > 1 ? chartData[lastIndex - 1].rate : lastRate;
+
+
   return (
-    <div className="chart-container">
+    <div className="chart-container"> 
+    <div className="chart-stats">
+      <MarketStats  open={dailyOpenRate} last={lastRate} />
+    </div>
       <div className="chart-header-group">
         <h3 className="chart-title"> MARKET HISTORY ({days}D)</h3>
 
@@ -146,29 +156,14 @@ export function CurrencyChart({ base, quote }: CurrencyChartProps) {
       </div>
 
       <div
-        className="chart-axis-x"
-        style={{ paddingLeft: `${(paddingLeft / svgWidth) * 100}%` }}>
-        {labelsX.map((day, idx) => {
-          let formattedDate = day.date;
-
-          const parts = day.date.split(" ");
-          
-          if (parts.length >= 2) {
-            const dayNum = parts[0];
-            const trMonth = parts[1];
-            
-            if (monthMap[trMonth]) {
-              formattedDate = `${monthMap[trMonth]} ${dayNum}`; 
-            }
-          }
-
-          return (
-            <span key={idx} className="chart-date-label">
-              {formattedDate}
-            </span>
-          );
-        })}
-      </div>
+  className="chart-axis-x"
+  style={{ paddingLeft: `${(paddingLeft / svgWidth) * 100}%` }}>
+  {labelsX.map((day, idx) => (
+    <span key={idx} className="chart-date-label">
+      {day.date} 
+    </span>
+  ))}
+</div>
     </div>
   );
 }
