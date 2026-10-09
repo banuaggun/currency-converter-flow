@@ -1,6 +1,5 @@
 import React from "react";
 
-// Ortak tip tanımı (Tüm ikonlar bu özellikleri miras alacak)
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
   color?: string;
@@ -44,9 +43,9 @@ export const SwitchIcon: React.FC<IconProps> = ({
         points="112 176 80 208 48 176"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
       />
       <line
         x1="80"
@@ -55,17 +54,17 @@ export const SwitchIcon: React.FC<IconProps> = ({
         y2="208"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
       />
       <polyline
         points="144 80 176 48 208 80"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
       />
       <line
         x1="176"
@@ -74,9 +73,9 @@ export const SwitchIcon: React.FC<IconProps> = ({
         y2="48"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="16"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
       />
     </svg>
   );

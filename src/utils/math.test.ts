@@ -3,26 +3,27 @@ function calculateResult(amount: number, rate: number): number {
 }
 
 export function runManualTests() {
-  console.log("%c🧪 [MİMARİ GÜNLÜK] Birim Testleri Başlatılıyor...", "color: #4f46e5; font-weight: bold;");
+  console.log("%c [ARCHITECTURE LOG] Starting Unit Tests...", "color: #4f46e5; font-weight: bold;");
 
   const test1 = calculateResult(100, 34.25);
-  if (test1 === 3425) {
-    console.log("%c✅ Test 1 Başarılı: Matematik motoru doğru çarpıyor.", "color: #10b981;");
+ if (test1 === 3425) {
+    console.log("%c Test 1 Successful: The math engine multiplies correctly.", "color: #10b981;");
   } else {
-    console.error("❌ Test 1 Başarısız!", test1);
+    console.error("Test 1 Failed!", test1);
   }
 
   const test2 = calculateResult(0, 34.25);
   if (test2 === 0) {
-    console.log("%c✅ Test 2 Başarılı: Sıfır miktarı güvenli şekilde 0 döndürüyor.", "color: #10b981;");
+    console.log("%c Test 2 Successful: Zero amount safely returns 0.", "color: #10b981;");
   } else {
-    console.error("❌ Test 2 Başarısız!", test2);
+    console.error("Test 2 Failed!", test2);
   }
+
 }
 
 
 export async function runLiveApiIntegrationTest() {
-  console.log("%c🌐 [ENTEGRASYON] Canlı API Bağlantı Testi Başlatılıyor...", "color: #0284c7; font-weight: bold;");
+  console.log("%c [INTEGRATION] Live API Connection Test Starting...", "color: #0284c7; font-weight: bold;");
 
   const baseUrl = "https://api.frankfurter.dev/v2/"; 
   const endpoint = "rates?base=";
@@ -41,18 +42,19 @@ const targetCurrency = familyOfCurrencies[randomIndex];
     const response = await fetch(apiUrl);
     
     if (!response.ok) {
-      throw new Error(`API yanıt vermedi. Durum Kodu: ${response.status}`);
+      throw new Error(`API did not respond. Status Code: ${response.status}`);
     }
 
     const data = await response.json();
 
     if (Array.isArray(data) && data.length > 0) {
-      console.log(`%c✅ Entegrasyon Başarılı: Frankfurter API ayakta ve veri akışı aktif! (Gelen kur sayısı: ${data.length})`, "color: #10b981; font-weight: bold;");
+      console.log(`%c Integration Successful: Frankfurter API is up and data flow is active! (Number of rates received: ${data.length})`, "color: #10b981; font-weight: bold;");
     } else {
-      console.warn("⚠️ API bağlandı fakat gelen veri formatı dizi (array) değil!", data);
+      console.warn(" API connected but the incoming data format is not an array!", data);
     }
 
   } catch (error: any) {
-    console.error("%c❌ Entegrasyon Başarısız! Detay:", "color: #ef4444; font-weight: bold;", error.message);
+    console.error("%c Integration Failed! Detail:", "color: #ef4444; font-weight: bold;", error.message);
   }
+
 }
