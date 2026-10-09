@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Flag } from "../ui/flag/Flag"; 
 import "./currency-input.css";
-import { PlayIcon } from "../ui/icons/icons";
+import { CheckIcon, PlayIcon, SearchIcon } from "../ui/icons/icons";
 
 interface CurrencyItem {
   code: string;
@@ -84,7 +84,9 @@ export function CurrencyInput({
           {isOpen && (
             <div className="dropdown-menu-panel">
               <div className="search-box-wrapper">
-                <span className="search-icon">🔍</span>
+                <span className="search-icon">
+                  <SearchIcon />
+                </span>
                 <input
                   type="text"
                   placeholder="Search currencies..."
@@ -117,7 +119,9 @@ export function CurrencyInput({
                           <span className="currency-name-text">{cur.name}</span>
                         </div>
                         {selectedCurrency.toUpperCase() === cur.code.toUpperCase() && (
-                          <span className="check-mark">✓</span>
+                          <span className="check-mark">
+                            <CheckIcon />
+                          </span>
                         )}
                       </div>
                     ))}

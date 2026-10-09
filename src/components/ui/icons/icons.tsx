@@ -5,7 +5,6 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   color?: string;
 }
 
-// 1. İkon: Play İkonu
 export const PlayIcon: React.FC<IconProps> = ({
   size = 16,
   color = "currentColor",
@@ -80,3 +79,65 @@ export const SwitchIcon: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+export const SearchIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = "currentColor",
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      width={size}
+      height={size}
+      fill={color}
+      {...props}>
+      <rect width="256" height="256" fill="none" />
+      <circle
+        cx="112"
+        cy="112"
+        r="80"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+      <line
+        x1="168.57"
+        y1="168.57"
+        x2="224"
+        y2="224"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="16"
+      />
+    </svg>
+  );
+};
+
+export const CheckIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = "currentColor",
+  ...props
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      {...props}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor" 
+      strokeWidth="3.5"     
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4.5 12.5L9.5 17.5C11.5 13.5 15.5 8 20 4.5" />
+    </svg>
+  );
+};
+
