@@ -1,0 +1,49 @@
+.base-chart-container {
+  margin-top: 30px;
+  padding: 16px 8px;
+  background-color: var(--bg-main); 
+  border-radius: 8px;
+  border: 1px solid var(--border-light); 
+  box-shadow: var(--shadow-lg); 
+  display: flex; 
+  flex-direction: column; 
+  gap:20px; 
+} 
+
+.timeframe-selector{
+  display: flex; 
+  justify-content: flex-start; 
+  gap:16px; 
+  margin-bottom: 16px; 
+} 
+
+.timeframe-btn{ 
+  border:none; 
+  outline:0; 
+  background-color: var(--border-light);
+  padding:6px 12px; 
+  font-size: 1rem; 
+  font-weight: 700;  
+  color:var(--text-muted);
+}
+
+.timeframe-btn:hover, 
+.timeframe-btn.active{
+  border:none; 
+  outline: 0;
+  background-color: var(--bg-row-selected);
+  color:var(--text-primary);
+} 
+
+.chart-grid-lines line {
+  stroke: var(--scrollbar-thumb);
+  stroke-width: 1;
+  stroke-dasharray: 8 8; 
+}
+
+.chart-axis-y-text text, 
+.chart-axis-x-text text {
+  font-size: 16px; 
+  font-weight:600;
+  font-family: var(--font-main);
+}
