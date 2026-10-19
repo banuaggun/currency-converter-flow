@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useGetChartRatesQuery } from "../../store/currencyApi";
 import { MarketStats } from "../market-stats/MarketStats";
+import { BaseChart } from "../ui/base-chart/BaseChart"; 
+import './currency-compare.css'; 
 
 interface CurrencyCompareProps {
   base: string; 
@@ -17,13 +19,6 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
     isLoading,
     error,
   } = useGetChartRatesQuery({ base, quote: compareWith, days });
-
-  const timeframes = [
-    { label: "7D", value: 7 },
-    { label: "1M", value: 30 },
-    { label: "3M", value: 90 },
-    { label: "1Y", value: 365 },
-  ];
 
   if (base === compareWith) {
     return (
@@ -49,37 +44,6 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
     );
   }
 
-  const rates = chartData.map((d) => d.rate);
-  const maxRate = Math.max(...rates);
-  const minRate = Math.min(...rates);
-  const midRate = (maxRate + minRate) / 2;
-  const rateRange = maxRate - minRate || 1;
-
-  const svgWidth = 600;
-  const svgHeight = 160;
-
-  const paddingLeft = 65;
-  const paddingRight = 20;
-  const paddingTop = 15;
-  const paddingBottom = 15;
-
-  const step = Math.ceil(chartData.length / 6);
-  const labelsX = chartData.filter((_, idx) => idx % step === 0);
-
-  const points = chartData.map((day, idx) => {
-    const x =
-      paddingLeft +
-      (idx / (chartData.length - 1)) * (svgWidth - paddingLeft - paddingRight);
-    const y =
-      svgHeight -
-      paddingBottom -
-      ((day.rate - minRate) / rateRange) *
-        (svgHeight - paddingTop - paddingBottom);
-    return { x, y };
-  });
-
-  const linePath = points.map((p) => `${p.x},${p.y}`).join(" ");
-
   const lastIndex = chartData.length - 1;
   const lastRate = chartData[lastIndex]?.rate || 0;
   const dailyOpenRate =
@@ -91,52 +55,25 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
         <MarketStats open={dailyOpenRate} last={lastRate} />
       </div>
 
-      <div
-        className="chart-header-group"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "1rem",
-        }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <h3 className="chart-title" style={{ margin: 0, fontSize: "1rem" }}>
+      <div className="chart-header-group">
+        <div className="chart-content">
+          <h3 className="chart-title">
             COMPARE WITH:
           </h3>
           <select
             value={compareWith}
             onChange={(e) => setCompareWith(e.target.value)}
-            className="compare-select"
-            style={{
-              backgroundColor: "#0f172a",
-              color: "#ffffff",
-              border: "1px solid #334155",
-              padding: "0.35rem 0.75rem",
-              borderRadius: "6px",
-              cursor: "pointer",
-              fontWeight: "600",
-            }}>
-            {/* Ana çeviricide seçili olan kur listede gizlensin veya seçilemesin */}
+            className="compare-select">
+            
             {base !== "EUR" && <option value="EUR">EUR (Euro)</option>}
             {base !== "USD" && <option value="USD">USD (Dolar)</option>}
             {base !== "GBP" && <option value="GBP">GBP (Sterlin)</option>}
             {base !== "JPY" && <option value="JPY">JPY (Yen)</option>}
             {base !== "TRY" && <option value="TRY">TRY (Lira)</option>}
             {base !== "AUD" && (
-              <option value="AUD">AUD (Avustralya Dollar)</option>
+              <option value="AUD">AUD (Australian Dollar)</option>
             )}
           </select>
-        </div>
-
-        <div className="timeframe-selector">
-          {timeframes.map((tf) => (
-            <button
-              key={tf.value}
-              className={`timeframe-btn ${days === tf.value ? "active" : ""}`}
-              onClick={() => setDays(tf.value)}>
-              {tf.label}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -153,68 +90,17 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
         <span style={{ color: "#38bdf8", fontWeight: "600" }}>
           {compareWith}
         </span>{" "}
-        per <span style={{ color: "#000", fontWeight: "600" }}>1 {base}</span>{" "}
+        per <span style={{ color: "#000", fontWeight: "600" }}>  {base}</span>{" "}
         over the last {days} days.
       </div>
 
-      <div className="chart-wrapper">
-        <svg
-          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-          width="100%"
-          height="100%">
-          <g className="chart-axis-y-text">
-            <text x={paddingLeft - 10} y={paddingTop + 5} textAnchor="end">
-              {maxRate.toFixed(4)}
-            </text>
-            <text x={paddingLeft - 10} y={svgHeight / 2 + 2} textAnchor="end">
-              {midRate.toFixed(4)}
-            </text>
-            <text
-              x={paddingLeft - 10}
-              y={svgHeight - paddingBottom}
-              textAnchor="end">
-              {minRate.toFixed(4)}
-            </text>
-          </g>
-
-          <g className="chart-grid-lines">
-            <line
-              x1={paddingLeft}
-              y1={paddingTop}
-              x2={svgWidth - paddingRight}
-              y2={paddingTop}
-            />
-            <line
-              x1={paddingLeft}
-              y1={svgHeight / 2}
-              x2={svgWidth - paddingRight}
-              y2={svgHeight / 2}
-            />
-            <line
-              x1={paddingLeft}
-              y1={svgHeight - paddingBottom}
-              x2={svgWidth - paddingRight}
-              y2={svgHeight - paddingBottom}
-            />
-          </g>
-
-          <polyline
-            points={linePath}
-            className="chart-line-compare"
-            style={{ fill: "none", stroke: "#38bdf8", strokeWidth: 2 }}
-          />
-        </svg>
-      </div>
-
-      <div
-        className="chart-axis-x"
-        style={{ paddingLeft: `${(paddingLeft / svgWidth) * 100}%` }}>
-        {labelsX.map((day, idx) => (
-          <span key={idx} className="chart-date-label">
-            {day.date}
-          </span>
-        ))}
-      </div>
+      <BaseChart 
+        data={chartData} 
+        variant="area" 
+        lineColor="#38bdf8" 
+        currentDays={days}
+        onTimeframeChange={setDays}
+      />
     </div>
   );
 }

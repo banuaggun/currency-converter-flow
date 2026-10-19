@@ -1,0 +1,46 @@
+.chart-header-group {
+  margin-bottom: 16px;
+}
+
+.chart-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chart-title {
+  color: var(--text-secondary);
+  letter-spacing: 0.8px;
+}
+
+.compare-select {
+  width: 100%;
+  max-width: 240px; 
+  padding: 8px 12px; 
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-light); 
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.compare-select:hover {
+  border-color: var(--scrollbar-thumb);
+  background-color: var(--bg-main);
+}
+
+.compare-select:focus {
+  border-color: var(--bg-row-selected); 
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.15); 
+}
+
+.compare-select option {
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--bg-main);
+  padding: 8px; 
+}
