@@ -1,4 +1,4 @@
-import { useGetMarketSnapshotQuery } from '../../store/pairsApi'; 
+import { useGetMarketSnapshotQuery, useGetLatestDateQuery } from '../../store/pairsApi'; 
 import './currency-pairs.css';
 
 interface SnapshotPair {
@@ -7,7 +7,10 @@ interface SnapshotPair {
 }
 
 export function CurrencyPairs() {
-  const { data: todayRates, isLoading: isTodayLoading, error: todayError, refetch } = useGetMarketSnapshotQuery();
+  const { data: todayRates, isLoading: isTodayLoading, error: todayError } = useGetMarketSnapshotQuery(); 
+
+    const { data: latestApiDate } = useGetLatestDateQuery();
+
 
   const getYesterdayDateString = (): string => {
     const d = new Date();
@@ -30,21 +33,26 @@ export function CurrencyPairs() {
   ];
 
   if (isTodayLoading || isYesterdayLoading) {
-    return <div className="pairs-card" style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem' }}>Piyasa Verileri Yükleniyor...</div>;
+    return <div className="pairs-card" style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem' }}>Loading Market Data...</div>;
   }
 
   if (todayError || !todayRates) {
-    return <div className="pairs-card" style={{ color: '#ef4444', textAlign: 'center', padding: '3rem' }}>Kurlar çekilemedi.</div>;
-  }
+    return <div className="pairs-card" style={{ color: '#ef4444', textAlign: 'center', padding: '3rem' }}>Failed to fetch exchange rates.</div>;
+  } 
+
 
   return (
     <div className="pairs-card">
       <div className="pairs-header">
-        <div>
-          <h2 className="pairs-title">Market Snapshot</h2>
-          <div className="pairs-subtitle">Canlı Majör Pariteler (100% Real)</div>
+        <div className='pairs-header-content'>
+          <h3 className="chart-title">Market Snapshot</h3>
+          <p className="pairs-subtitle">
+            Daily Major Pairs (ECB Source)
+          </p>
         </div>
-        <button className="pairs-refresh-btn" onClick={() => refetch()} title="Kurları Yenile">↻</button>
+         <div className="pairs-update-badge" title="Rates are updated once a day by the European Central Bank">
+          Last Updated: {latestApiDate || "Loading..."}
+        </div>
       </div>
 
       <div className="pairs-list-wrapper">

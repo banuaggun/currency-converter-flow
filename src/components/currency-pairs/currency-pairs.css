@@ -1,55 +1,46 @@
 .pairs-card {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
+  background-color: var(--bg-main);
+  border-radius: 8px;
+  border: 1px solid var(--border-light); 
+  margin:30px auto 40px auto; 
+  width:calc(100% - 48px);
 }
 
 .pairs-header {
-  display: flex;
+  display: flex; 
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 2rem;
+  align-items: flex-start; 
+  padding:0 16px; 
+  width:fill-content; 
 }
+ 
+.pairs-header-content{
+  display: flex; 
+  flex-direction: column; 
+  gap:8px; 
+  padding:12px 0; 
+  width:100%; 
+} 
 
-.pairs-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  font-family: 'Inter', sans-serif;
-  color: #000000;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+.pairs-header-content h3, .pairs-header-content p{
+  margin:0; 
+  padding:0;
+} 
+
+.pairs-update-badge{  
+  width:100%;
+  display:flex; 
+  justify-content: flex-end;  
+  color:var(--text-muted); 
+  text-transform: capitalize;
 }
-
-.pairs-subtitle {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
-.pairs-refresh-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: #000000;
-  transition: transform 0.2s ease;
-  padding: 0;
-  line-height: 1;
-}
-
-.pairs-refresh-btn:hover {
-  transform: rotate(45deg);
-}
-
-.pairs-list-wrapper {
-  max-height: 380px; 
+ 
+.pairs-list-wrapper { 
+  height:auto; 
+  padding: 0 16px;
+ /* max-height: 380px; */ 
   overflow-y: auto;
-  padding-right: 1rem;
 }
 
 .pairs-list-wrapper::-webkit-scrollbar {
@@ -62,7 +53,7 @@
 }
 
 .pairs-list-wrapper::-webkit-scrollbar-thumb {
-  background: #f59e0b; 
+  background: var(--scrollbar-thumb); 
   border-radius: 10px;
 }
 
@@ -79,24 +70,22 @@
 }
 
 .pair-name {
-  font-size: 1.15rem;
+  font-size: 16px;
   font-weight: 700;
-  color: #0f172a;
-  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
 }
 
 .pair-value {
-  font-size: 1.15rem;
+  font-size: 16px;
   font-weight: 600;
-  color: #0f172a;
-  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
   text-align: right;
   flex: 1;
   padding-right: 2.5rem; 
 }
 
 .pair-percentage {
-  font-size: 1.1rem;
+  font-size: 16px;
   font-weight: 700;
   width: 75px;
   text-align: right;

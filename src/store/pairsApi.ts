@@ -5,7 +5,8 @@ interface ApiRateRow {
   base: string;
   quote: string;
   rate: number;
-}
+} 
+
 
 export const pairsApi = createApi({
   reducerPath: "pairsApi",
@@ -26,8 +27,17 @@ export const pairsApi = createApi({
         
         return transformed;
       },
-    }),
+    }), 
+
+
+ getLatestDate: builder.query<string, void>({
+      query: () => "rates",
+      transformResponse: (response: ApiRateRow[]) => {
+        return response.length > 0 ? response[0].date : new Date().toISOString().split('T')[0];
+      }
+    })
+
   }),
 });
 
-export const { useGetMarketSnapshotQuery } = pairsApi;
+export const { useGetMarketSnapshotQuery, useGetLatestDateQuery  } = pairsApi;

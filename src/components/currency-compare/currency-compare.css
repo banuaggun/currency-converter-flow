@@ -8,7 +8,8 @@
   gap: 6px;
 }
 
-.chart-title {
+.chart-title { 
+  text-transform: uppercase;
   color: var(--text-secondary);
   letter-spacing: 0.8px;
 }
