@@ -1,75 +1,54 @@
-# React + TypeScript + Vite
+# 💱 Currency Converter & Market Snapshot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fast, and responsive **Currency Converter** web application built with **React**, **TypeScript**, and **Redux Toolkit (RTK Query)**. The styling is crafted entirely using **Pure CSS** without any UI libraries, demonstrating a strong grip on vanilla layouts and smooth animations.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Dynamic Currency Conversion:** Seamlessly convert between multiple global currencies with accurate rates.
+- **Market Snapshot:** A dedicated dashboard displaying daily major currency pairs (EUR/USD, USD/JPY, GBP/USD, etc.).
+- **Smart UX Data Sync:** The application fetches official reference rates from the **European Central Bank (ECB)** via the Frankfurter API. It includes a dynamic `Last Updated` badge to communicate data freshness clearly to the user.
+- **Pure CSS Layouts & Animations:** Built completely with vanilla CSS, featuring custom responsive grids, flexbox alignments, smooth transitions, and tactile hover states.
+- **Robust State Management:** Powered by RTK Query for efficient data fetching, automated caching, and clean asynchronous architecture.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend Framework:** React 19.2.8
+- **Language:** TypeScript (TSX)
+- **State Management & Data Fetching:** Redux Toolkit & RTK Query
+- **Styling:** Pure CSS (Custom variables, Keyframes, Transitions)
+- **API Provider:** Frankfurter API (European Central Bank data source)
 
-## Expanding the ESLint configuration
+## 📦 Installation & Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Follow these steps to run the project locally:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Clone the repository:**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   ```bash
+   git clone https://github.com
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Navigate into the project directory:**
 
-```
+   ```bash
+   cd YOUR_REPO_NAME
+   ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+3. **Install dependencies:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   npm install
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. **Start the local development server:**
 
-```
+   ```bash
+   npm run dev
+   ```
+
+5. Open the local link (usually `http://localhost:5173`) in your browser to view the app.
+
+## 💡 Architecture & UX Decisions
+
+- **Handling Daily API Constraints:** The Frankfurter API updates its dataset once a day. Instead of forcing repetitive network requests with a traditional "Refresh" button that yields identical data, the UI was refactored to include a `Last Updated` badge. This provides a transparent UX, indicating exact data alignment with the European Central Bank's daily schedule.
+- **Pure CSS Approach:** Bypassing heavy frameworks like Tailwind or Component Libraries, this project relies purely on native CSS features like **CSS Variables (Custom Properties)** for easy theme management and custom timing functions for smooth visual feedback.
