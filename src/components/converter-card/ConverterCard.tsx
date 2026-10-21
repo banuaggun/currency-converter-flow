@@ -1,43 +1,71 @@
-import { CurrencyInput } from '../currency-input/CurrencyInput';
-import { ResultDisplay } from '../result-display/ResultDisplay';
-import { useAppDispatch, useAppSelector, type RootState } from '../../store';
-import { setAmount, setFromCurrency, setToCurrency, swapCurrencies } from '../../store/currencySlice';
-import { useGetLiveRatesQuery } from '../../store/currencyApi'; 
-import { CurrencyChart } from '../currency-chart/CurrencyChart';
-import './converter-card.css';
-import { SwitchIcon } from '../ui/icons/icons';
-import { Message } from '../ui/messages/Message';
+import { CurrencyInput } from "../currency-input/CurrencyInput";
+import { useAppDispatch, useAppSelector, type RootState } from "../../store";
+import {
+  setAmount,
+  setFromCurrency,
+  setToCurrency,
+  swapCurrencies,
+} from "../../store/currencySlice";
+import { useGetLiveRatesQuery } from "../../store/currencyApi";
+import { CurrencyChart } from "../currency-chart/CurrencyChart";
+import "./converter-card.css";
+import { SwitchIcon } from "../ui/icons/icons";
+import { Message } from "../ui/messages/Message";
 
 const POPULAR_CURRENCIES = new Set(["USD", "EUR", "GBP", "TRY"]);
 
-export function ConverterCard() { 
+export function ConverterCard() {
   const dispatch = useAppDispatch();
 
   const amount = useAppSelector((state: RootState) => state.currency.amount);
-  const fromCurrency = useAppSelector((state: RootState) => state.currency.fromCurrency);
-  const toCurrency = useAppSelector((state: RootState) => state.currency.toCurrency);
+  const fromCurrency = useAppSelector(
+    (state: RootState) => state.currency.fromCurrency,
+  );
+  const toCurrency = useAppSelector(
+    (state: RootState) => state.currency.toCurrency,
+  );
 
-  const { data: rates, isLoading, error, refetch } = useGetLiveRatesQuery(fromCurrency);
+  const {
+    data: rates,
+    isLoading,
+    error,
+    refetch,
+  } = useGetLiveRatesQuery(fromCurrency);
 
   const handleAmountChange = (value: string) => dispatch(setAmount(value));
-  const handleFromChange = (currency: string) => dispatch(setFromCurrency(currency));
-  const handleToChange = (currency: string) => dispatch(setToCurrency(currency));
+  const handleFromChange = (currency: string) =>
+    dispatch(setFromCurrency(currency));
+  const handleToChange = (currency: string) =>
+    dispatch(setToCurrency(currency));
   const handleSwap = () => dispatch(swapCurrencies());
 
   const targetRate = rates?.[toCurrency.toUpperCase()] || 0;
-  const calculatedReceiveAmount = amount && targetRate 
-    ? (parseFloat(amount) * targetRate).toFixed(2) 
-    : "0.00";
+  const calculatedReceiveAmount =
+    amount && targetRate
+      ? (parseFloat(amount) * targetRate).toFixed(2)
+      : "0.00";
+
+  const displayAmount = amount && parseFloat(amount) > 0 ? amount : "1";
+
+  const displayDate = new Date().toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 
   const dynamicCurrencies = (() => {
     if (!rates) return [];
-    
-    const allCodes = Array.from(new Set([fromCurrency.toUpperCase(), ...Object.keys(rates)]));
+
+    const allCodes = Array.from(
+      new Set([fromCurrency.toUpperCase(), ...Object.keys(rates)]),
+    );
 
     return allCodes
       .map((code) => ({
         code: code,
-        name: code === "TRY" ? "Turkish Lira" : `${code} Currency`, 
+        name: code === "TRY" ? "Turkish Lira" : `${code} Currency`,
         isPopular: POPULAR_CURRENCIES.has(code),
       }))
       .sort((a, b) => {
@@ -49,52 +77,62 @@ export function ConverterCard() {
 
   return (
     <div className="converter-card">
-      <h1 className="converter-title">Currency Flow</h1> 
+      <h1 className="converter-title">Currency Flow</h1>
+
+      {!isLoading && !error && rates && (
+        <div className="converter-summary-display">
+          <p className="summary-base-text">
+            {displayAmount} {fromCurrency.toUpperCase()} equals
+          </p>
+          <h2 className="summary-total-text">
+            {amount && targetRate
+              ? calculatedReceiveAmount
+              : targetRate.toFixed(2)}{" "}
+            {toCurrency.toUpperCase()}
+          </h2>
+          <p className="summary-meta-text">
+            {displayDate} UTC · Data Source: Frankfurter API
+          </p>
+        </div>
+      )}
 
       <div className="converter-flex-wrapper">
-        
-        <CurrencyInput 
-          label="SEND" 
-          amount={amount} 
+        <CurrencyInput
+          label="SEND"
+          amount={amount}
           onChangeAmount={handleAmountChange}
           selectedCurrency={fromCurrency}
           onChangeCurrency={handleFromChange}
-          currencies={dynamicCurrencies} 
+          currencies={dynamicCurrencies}
         />
 
-        <button className="inline-swap-btn" onClick={handleSwap} title="Switch Currencies">
-         <SwitchIcon />
+        <button
+          className="inline-swap-btn"
+          onClick={handleSwap}
+          title="Switch Currencies">
+          <SwitchIcon />
         </button>
 
-        <CurrencyInput 
-          label="RECEIVE" 
-          amount={calculatedReceiveAmount} 
+        <CurrencyInput
+          label="RECEIVE"
+          amount={calculatedReceiveAmount}
           selectedCurrency={toCurrency}
           onChangeCurrency={handleToChange}
           readOnly={true}
-          currencies={dynamicCurrencies} 
+          currencies={dynamicCurrencies}
         />
-
       </div>
 
       {isLoading ? (
         <Message text="Updating Exchange Rates..." variant="loading" />
       ) : error ? (
-         <Message 
-          text="Failed to fetch exchange rates. Please check your network." 
-          variant="error" 
-          onRetry={refetch} 
+        <Message
+          text="Failed to fetch exchange rates. Please check your network."
+          variant="error"
+          onRetry={refetch}
         />
       ) : (
-        <>
-          <ResultDisplay 
-            amount={amount}
-            fromCurrency={fromCurrency}
-            toCurrency={toCurrency}
-            rates={rates || {}} 
-          /> 
-          <CurrencyChart base={fromCurrency} quote={toCurrency} /> 
-        </>
+        <CurrencyChart base={fromCurrency} quote={toCurrency} />
       )}
     </div>
   );
