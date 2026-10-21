@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useGetChartRatesQuery } from "../../store/currencyApi";
 import { MarketStats } from "../market-stats/MarketStats";
-import { BaseChart } from "../ui/base-chart/BaseChart"; 
-import './currency-compare.css'; 
+import { BaseChart } from "../ui/base-chart/BaseChart";
+import "./currency-compare.css";
+import { Message } from "../ui/messages/Message";
 
 interface CurrencyCompareProps {
-  base: string; 
+  base: string;
 }
 
 export function CurrencyCompare({ base }: CurrencyCompareProps) {
@@ -18,29 +19,31 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
     data: chartData,
     isLoading,
     error,
+    refetch,
   } = useGetChartRatesQuery({ base, quote: compareWith, days });
 
   if (base === compareWith) {
     return (
-      <div style={{ color: "#ef4444", textAlign: "center", padding: "2rem" }}>
-        Please select a currency different from the base currency.
-      </div>
+      <Message
+        text=" Please select a currency different from the base currency."
+        variant="info"
+      />
     );
   }
 
   if (isLoading) {
     return (
-      <div style={{ textAlign: "center", padding: "3rem", color: "#64748b" }}>
-        Fetching comparative market data...
-      </div>
+      <Message text="Fetching comparative market data..." variant="loading" />
     );
   }
 
   if (error || !chartData || chartData.length === 0) {
     return (
-      <div style={{ color: "#ef4444", textAlign: "center", padding: "2rem" }}>
-        Failed to load comparative market data.
-      </div>
+      <Message
+        text="Failed to load comparative market data."
+        variant="error"
+        onRetry={refetch}
+      />
     );
   }
 
@@ -57,14 +60,11 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
 
       <div className="chart-header-group">
         <div className="chart-content">
-          <h3 className="chart-title">
-            COMPARE WITH:
-          </h3>
+          <h3 className="chart-title">COMPARE WITH:</h3>
           <select
             value={compareWith}
             onChange={(e) => setCompareWith(e.target.value)}
             className="compare-select">
-            
             {base !== "EUR" && <option value="EUR">EUR (Euro)</option>}
             {base !== "USD" && <option value="USD">USD (Dolar)</option>}
             {base !== "GBP" && <option value="GBP">GBP (Sterlin)</option>}
@@ -90,14 +90,14 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
         <span style={{ color: "#38bdf8", fontWeight: "600" }}>
           {compareWith}
         </span>{" "}
-        per <span style={{ color: "#000", fontWeight: "600" }}>  {base}</span>{" "}
+        per <span style={{ color: "#000", fontWeight: "600" }}> {base}</span>{" "}
         over the last {days} days.
       </div>
 
-      <BaseChart 
-        data={chartData} 
-        variant="area" 
-        lineColor="#38bdf8" 
+      <BaseChart
+        data={chartData}
+        variant="area"
+        lineColor="#38bdf8"
         currentDays={days}
         onTimeframeChange={setDays}
       />

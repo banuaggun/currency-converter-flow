@@ -6,6 +6,7 @@ import { useGetLiveRatesQuery } from '../../store/currencyApi';
 import { CurrencyChart } from '../currency-chart/CurrencyChart';
 import './converter-card.css';
 import { SwitchIcon } from '../ui/icons/icons';
+import { Message } from '../ui/messages/Message';
 
 const POPULAR_CURRENCIES = new Set(["USD", "EUR", "GBP", "TRY"]);
 
@@ -16,7 +17,7 @@ export function ConverterCard() {
   const fromCurrency = useAppSelector((state: RootState) => state.currency.fromCurrency);
   const toCurrency = useAppSelector((state: RootState) => state.currency.toCurrency);
 
-  const { data: rates, isLoading, error } = useGetLiveRatesQuery(fromCurrency);
+  const { data: rates, isLoading, error, refetch } = useGetLiveRatesQuery(fromCurrency);
 
   const handleAmountChange = (value: string) => dispatch(setAmount(value));
   const handleFromChange = (currency: string) => dispatch(setFromCurrency(currency));
@@ -77,13 +78,13 @@ export function ConverterCard() {
       </div>
 
       {isLoading ? (
-        <div style={{ textAlign: 'center', padding: '1.5rem', color: 'var(--accent-color)', fontWeight: 600 }}>
-          Updating Exchange Rates...
-        </div>
+        <Message text="Updating Exchange Rates..." variant="loading" />
       ) : error ? (
-        <div style={{ textAlign: 'center', padding: '1.5rem', color: '#ef4444', fontWeight: 600 }}>
-          Failed to fetch exchange rates.
-        </div>
+         <Message 
+          text="Failed to fetch exchange rates. Please check your network." 
+          variant="error" 
+          onRetry={refetch} 
+        />
       ) : (
         <>
           <ResultDisplay 

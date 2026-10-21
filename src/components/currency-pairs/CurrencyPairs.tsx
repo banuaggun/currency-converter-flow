@@ -1,5 +1,9 @@
-import { useGetMarketSnapshotQuery, useGetLatestDateQuery } from '../../store/pairsApi'; 
-import './currency-pairs.css';
+import {
+  useGetMarketSnapshotQuery,
+  useGetLatestDateQuery,
+} from "../../store/pairsApi";
+import { Message } from "../ui/messages/Message";
+import "./currency-pairs.css";
 
 interface SnapshotPair {
   base: string;
@@ -7,20 +11,25 @@ interface SnapshotPair {
 }
 
 export function CurrencyPairs() {
-  const { data: todayRates, isLoading: isTodayLoading, error: todayError } = useGetMarketSnapshotQuery(); 
+  const {
+    data: todayRates,
+    isLoading: isTodayLoading,
+    error: todayError,
+    refetch,
+  } = useGetMarketSnapshotQuery();
 
-    const { data: latestApiDate } = useGetLatestDateQuery();
-
+  const { data: latestApiDate } = useGetLatestDateQuery();
 
   const getYesterdayDateString = (): string => {
     const d = new Date();
     const dayOfWeek = d.getDay();
-    const offset = dayOfWeek === 1 ? 3 : 1; 
+    const offset = dayOfWeek === 1 ? 3 : 1;
     d.setDate(d.getDate() - offset);
-    return d.toISOString().split('T')[0];
+    return d.toISOString().split("T")[0];
   };
 
-  const { data: yesterdayRates, isLoading: isYesterdayLoading } = useGetMarketSnapshotQuery(getYesterdayDateString());
+  const { data: yesterdayRates, isLoading: isYesterdayLoading } =
+    useGetMarketSnapshotQuery(getYesterdayDateString());
 
   const marketSnapshotPairs: SnapshotPair[] = [
     { base: "EUR", quote: "USD" },
@@ -33,24 +42,29 @@ export function CurrencyPairs() {
   ];
 
   if (isTodayLoading || isYesterdayLoading) {
-    return <div className="pairs-card" style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '3rem' }}>Loading Market Data...</div>;
+    return <Message text="Loading Market Data..." variant="loading" />;
   }
 
   if (todayError || !todayRates) {
-    return <div className="pairs-card" style={{ color: '#ef4444', textAlign: 'center', padding: '3rem' }}>Failed to fetch exchange rates.</div>;
-  } 
-
+    return (
+      <Message
+        text="Failed to fetch exchange rates."
+        variant="error"
+        onRetry={refetch}
+      />
+    );
+  }
 
   return (
     <div className="pairs-card">
       <div className="pairs-header">
-        <div className='pairs-header-content'>
+        <div className="pairs-header-content">
           <h3 className="chart-title">Market Snapshot</h3>
-          <p className="pairs-subtitle">
-            Daily Major Pairs (ECB Source)
-          </p>
+          <p className="pairs-subtitle">Daily Major Pairs (ECB Source)</p>
         </div>
-         <div className="pairs-update-badge" title="Rates are updated once a day by the European Central Bank">
+        <div
+          className="pairs-update-badge"
+          title="Rates are updated once a day by the European Central Bank">
           Last Updated: {latestApiDate || "Loading..."}
         </div>
       </div>
@@ -60,14 +74,22 @@ export function CurrencyPairs() {
           const base = pair.base.toUpperCase();
           const quote = pair.quote.toUpperCase();
 
-          const calculateRate = (pool: { [key: string]: number } | undefined) => {
+          const calculateRate = (
+            pool: { [key: string]: number } | undefined,
+          ) => {
             if (!pool) return null;
-            if (pool[`${base}_${quote}`] !== undefined) return pool[`${base}_${quote}`];
-            if (pool[`${quote}_${base}`] !== undefined && pool[`${quote}_${base}`] > 0) return 1 / pool[`${quote}_${base}`];
-            
+            if (pool[`${base}_${quote}`] !== undefined)
+              return pool[`${base}_${quote}`];
+            if (
+              pool[`${quote}_${base}`] !== undefined &&
+              pool[`${quote}_${base}`] > 0
+            )
+              return 1 / pool[`${quote}_${base}`];
+
             const eurToBase = pool[`EUR_${base}`];
             const eurToQuote = pool[`EUR_${quote}`];
-            if (eurToBase && eurToQuote && eurToBase > 0) return eurToQuote / eurToBase;
+            if (eurToBase && eurToQuote && eurToBase > 0)
+              return eurToQuote / eurToBase;
             return null;
           };
 
@@ -80,21 +102,26 @@ export function CurrencyPairs() {
           if (currentPairRate && yesterdayPairRate) {
             const change = currentPairRate - yesterdayPairRate;
             const percentage = (change / yesterdayPairRate) * 100;
-            
+
             isPositive = percentage >= 0;
             percentageValue = Math.abs(percentage).toFixed(2);
           }
 
           return (
             <div key={index} className="pair-row">
-              <span className="pair-name">{pair.base}/{pair.quote}</span>
-              
+              <span className="pair-name">
+                {pair.base}/{pair.quote}
+              </span>
+
               <span className="pair-value">
                 {currentPairRate !== null ? currentPairRate.toFixed(4) : "—"}
               </span>
-              
-              <span className={`pair-percentage ${isPositive ? 'positive' : 'negative'}`}>
-                {isPositive ? `▲ +${percentageValue}%` : `▼ -${percentageValue}%`}
+
+              <span
+                className={`pair-percentage ${isPositive ? "positive" : "negative"}`}>
+                {isPositive
+                  ? `▲ +${percentageValue}%`
+                  : `▼ -${percentageValue}%`}
               </span>
             </div>
           );
