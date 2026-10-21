@@ -20,24 +20,18 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
     isLoading,
     error,
     refetch,
-  } = useGetChartRatesQuery({ base, quote: compareWith, days });
+  } = useGetChartRatesQuery(
+    { base, quote: compareWith, days },
+    { skip: base === compareWith } 
+  );
 
-  if (base === compareWith) {
-    return (
-      <Message
-        text=" Please select a currency different from the base currency."
-        variant="info"
-      />
-    );
-  }
-
-  if (isLoading) {
+  if (isLoading && base !== compareWith) {
     return (
       <Message text="Fetching comparative market data..." variant="loading" />
     );
   }
 
-  if (error || !chartData || chartData.length === 0) {
+  if (base !== compareWith && (error || !chartData || chartData.length === 0)) {
     return (
       <Message
         text="Failed to load comparative market data."
@@ -47,16 +41,18 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
     );
   }
 
-  const lastIndex = chartData.length - 1;
-  const lastRate = chartData[lastIndex]?.rate || 0;
+  const lastIndex = chartData ? chartData.length - 1 : 0;
+  const lastRate = chartData?.[lastIndex]?.rate || 0;
   const dailyOpenRate =
-    chartData.length > 1 ? chartData[lastIndex - 1].rate : lastRate;
+    chartData && chartData.length > 1 ? chartData[lastIndex - 1].rate : lastRate;
 
   return (
     <div className="compare-container">
-      <div className="chart-stats">
-        <MarketStats open={dailyOpenRate} last={lastRate} />
-      </div>
+      {base !== compareWith && chartData && chartData.length > 0 && (
+        <div className="chart-stats">
+          <MarketStats open={dailyOpenRate} last={lastRate} />
+        </div>
+      )}
 
       <div className="chart-header-group">
         <div className="chart-content">
@@ -77,30 +73,41 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
         </div>
       </div>
 
-      <div
-        className="compare-summary-text"
-        style={{
-          color: "#64748b",
-          fontSize: "0.85rem",
-          fontWeight: "500",
-          marginBottom: "0.75rem",
-          letterSpacing: "0.03em",
-        }}>
-        Showing relative performance of{" "}
-        <span style={{ color: "#38bdf8", fontWeight: "600" }}>
-          {compareWith}
-        </span>{" "}
-        per <span style={{ color: "#000", fontWeight: "600" }}> {base}</span>{" "}
-        over the last {days} days.
-      </div>
+      {base === compareWith ? (
+        <div style={{ marginTop: "1rem" }}>
+          <Message
+            text="Please select a currency different from the base currency."
+            variant="info"
+          />
+        </div>
+      ) : (
+        <>
+          <div
+            className="compare-summary-text"
+            style={{
+              color: "#64748b",
+              fontSize: "0.85rem",
+              fontWeight: "500",
+              marginBottom: "0.75rem",
+              letterSpacing: "0.03em",
+            }}>
+            Showing relative performance of{" "}
+            <span style={{ color: "#38bdf8", fontWeight: "600" }}>
+              {compareWith}
+            </span>{" "}
+            per <span style={{ color: "#000", fontWeight: "600" }}> {base}</span>{" "}
+            over the last {days} days.
+          </div>
 
-      <BaseChart
-        data={chartData}
-        variant="area"
-        lineColor="#38bdf8"
-        currentDays={days}
-        onTimeframeChange={setDays}
-      />
+          <BaseChart
+            data={chartData || []}
+            variant="area"
+            lineColor="#38bdf8"
+            currentDays={days}
+            onTimeframeChange={setDays}
+          />
+        </>
+      )}
     </div>
   );
 }
