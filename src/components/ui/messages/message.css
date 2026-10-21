@@ -1,0 +1,64 @@
+.message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.message-container.variant-error {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #b91c1c;
+}
+
+.message-container.variant-error .message-icon {
+  color: #ef4444;
+  font-size: 1.5rem;
+}
+
+.message-container.variant-loading {
+  background-color: transparent;
+  color: var(--accent-color, #3b82f6);
+}
+.message-container.variant-loading .message-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: message-spin 1s linear infinite;
+}
+
+.message-container.variant-info {
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  color: #1e40af;
+}
+
+.message-retry-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.message-retry-btn:hover {
+  background-color: #dc2626;
+}
+
+@keyframes message-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
