@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { Flag } from "../ui/flag/Flag"; 
 import "./currency-input.css";
 import { CheckIcon, PlayIcon, SearchIcon } from "../ui/icons/icons";
 
@@ -74,7 +73,6 @@ export function CurrencyInput({
             type="button"
             className="dropdown-trigger-btn"
             onClick={() => setIsOpen(!isOpen)}>
-            <Flag code={currentCurrency.code} width={24} height={24} />
             <span className="selected-code">{currentCurrency.code}</span>
             <span className={`arrow-icon ${isOpen ? "open" : ""}`}>
               <PlayIcon />
@@ -113,7 +111,6 @@ export function CurrencyInput({
                           setIsOpen(false);
                           setSearchQuery("");
                         }}>
-                        <Flag code={cur.code} width={24} height={24} />
                         <div className="currency-info-text">
                           <span className="currency-code-text">{cur.code}</span>
                           <span className="currency-name-text">{cur.name}</span>
@@ -143,7 +140,6 @@ export function CurrencyInput({
                           setIsOpen(false);
                           setSearchQuery("");
                         }}>
-                        <Flag code={cur.code} width={24} height={24} />
                         <div className="currency-info-text">
                           <span className="currency-code-text">{cur.code}</span>
                           <span className="currency-name-text">{cur.name}</span>
