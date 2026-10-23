@@ -83,16 +83,9 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
       ) : (
         <>
           <div
-            className="compare-summary-text"
-            style={{
-              color: "#64748b",
-              fontSize: "0.85rem",
-              fontWeight: "500",
-              marginBottom: "0.75rem",
-              letterSpacing: "0.03em",
-            }}>
+            className="compare-summary-text">
             Showing relative performance of{" "}
-            <span style={{ color: "#38bdf8", fontWeight: "600" }}>
+            <span>
               {compareWith}
             </span>{" "}
             per <span style={{ color: "#000", fontWeight: "600" }}> {base}</span>{" "}

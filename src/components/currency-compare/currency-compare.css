@@ -45,3 +45,25 @@
   background-color: var(--bg-main);
   padding: 8px; 
 }
+ 
+.compare-summary-text{
+  color:var(--text-secondary);  
+  font-size: 16px; 
+  font-weight:500;
+} 
+
+.compare-summary-text span{
+padding:2px 6px; 
+  font-weight: 600; 
+  font-size: 18px;
+}
+
+.compare-summary-text span:nth-child(1){
+  color:var(--text-primary); 
+  background-color: var(--bg-row-hover); 
+} 
+
+.compare-summary-text span:nth-child(2){
+  color: var(--text-primary); 
+  background-color: var(--border-gray-hover); 
+}

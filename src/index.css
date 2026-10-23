@@ -1,5 +1,5 @@
 :root {
-  --bg-color: #f0f2f5;       
+  --bg-color: #f0f7f4;       
   --bg-main: #ffffff;   
   --border-light: #e4e4e7;
   --font-main: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -13,7 +13,10 @@
   --scrollbar-thumb: #ababcf;
 
  --bg-row-hover: rgb(90, 199, 181);
-  --bg-row-selected: rgb(129, 223, 207); 
+  --bg-row-selected: rgb(129, 223, 207);  
+
+  --stats-positive:rgb(42, 136, 120); 
+  --stats-negative: rgb(239, 68, 68); 
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);

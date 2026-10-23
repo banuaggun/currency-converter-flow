@@ -6,7 +6,7 @@
 }
 
 .market-stat {
-  background: var(--bg-color);  
+  background: var(--bg-main);  
   box-shadow: var(--shadow-lg); 
   border:1px solid var(--border-light);
   color:var(--text-primary);
@@ -40,11 +40,11 @@
 }
 
 .market-stat-change.positive {
-  color: rgb(42, 136, 120); 
+  color: var(--stats-positive); 
 }
 
 .market-stat-change.negative {
-  color: #ef4444;
+  color: var(--stats-negative);
 }
 
 @media (min-width: 768px) {
