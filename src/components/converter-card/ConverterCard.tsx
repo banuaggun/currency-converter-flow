@@ -110,7 +110,7 @@ export function ConverterCard() {
           className="inline-swap-btn"
           onClick={handleSwap}
           title="Switch Currencies">
-          <SwitchIcon />
+          <SwitchIcon className="switch-icon" />
         </button>
 
         <CurrencyInput

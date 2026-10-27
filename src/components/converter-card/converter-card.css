@@ -15,7 +15,7 @@
   flex-direction: column;
   position: relative; 
   gap: 72px; 
-} 
+}  
 
 .inline-swap-btn {
   position: absolute;
@@ -50,3 +50,19 @@
 }
 
 
+ 
+@media only screen and (min-width:601px) and (max-width:1026px){
+  .converter-card{
+    width:calc(100% - 128px); 
+    margin:0 auto; 
+    max-width:max-content;
+  } 
+  .converter-flex-wrapper{
+    display: flex; 
+    flex-direction: row; 
+  } 
+
+  .inline-swap-btn > .switch-icon{
+    transform: rotate(90deg);
+  }
+}
