@@ -35,8 +35,14 @@ body {
   min-height: 100vh;
 }
 
-.dashboard-container, .dashboard-left, .dashboard-right{
+.dashboard-container, .dashboard-left{
   width:100%; 
   height:auto; 
+  margin:0 auto;
+} 
+
+.dashboard-right{
+  padding: 24px; 
+  width:auto; 
   margin:0 auto;
 }
