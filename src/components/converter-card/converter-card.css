@@ -2,19 +2,33 @@
   padding: 24px; 
   width: calc(100% - 48px); 
   max-width:400px;
-  margin: 0 auto; 
+  margin: 0 auto;  
+  background-color: var(--bg-main);
 } 
 
 .converter-title {
-  font-family: var(--font-main);
+  font-family:var(--font-secondary);
   color: var(--text-primary); 
+  letter-spacing: 0.8px; 
+  font-size:36px; 
+} 
+
+.summary-total-text{
+  font-size:28px;
 }
- 
+
+.summary-meta-text{
+  color:var(--text-muted); 
+  font-size: 16px;
+}
+
 .converter-flex-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
   position: relative; 
-  gap: 72px; 
+  gap: 64px; 
 }  
 
 .inline-swap-btn {
@@ -55,16 +69,20 @@
   .converter-card{
     width:calc(100% - 128px); 
     margin:0 auto; 
-    max-width:none;
-  } 
+    max-width:none; 
+  }  
+
   .converter-flex-wrapper{
     display: flex; 
     flex-direction: row; 
-    justify-content: space-between;
+    justify-content: space-between;  
+    align-items: flex-end;
+    gap:80px;
   } 
 
+
   .inline-swap-btn > .switch-icon{
-    transform: rotate(90deg);
+    transform: rotate(90deg); 
   }
 } 
 

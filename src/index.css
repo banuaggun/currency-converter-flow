@@ -2,11 +2,11 @@
   --bg-color: #f0f7f4;       
   --bg-main: #ffffff;   
   --border-light: #ccccd3;
-  --font-main: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-     
+  --font-main: "Cabin", sans-serif;
+  --font-secondary:  "Merriweather", serif;
   --text-primary: #061538;
   --text-secondary: #18181b;
-  --text-muted: #71717a;
+  --text-muted: #555;
   
   --bg-gray-light: #f4f4f5;
   --border-gray-hover: #d4d4d8;
@@ -28,7 +28,7 @@
 body {
   margin: 0; 
   padding:0;
-  background-color: var(--bg-color); 
+  background-color: var(--bg-main); 
   font-family:var(--font-main);
   width:100%;
   height:100%;  

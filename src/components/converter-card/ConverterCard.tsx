@@ -91,8 +91,8 @@ export function ConverterCard() {
             {toCurrency.toUpperCase()}
           </h2>
           <p className="summary-meta-text">
-            {displayDate} UTC · Data Source: Frankfurter API
-          </p>
+            {displayDate} UTC {"\u2014"}   Data Source: Frankfurter API
+          </p> 
         </div>
       )}
 
