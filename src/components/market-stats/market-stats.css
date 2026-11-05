@@ -62,7 +62,7 @@
 @media only screen and (min-width: 1027px) and (max-width: 1426px) {
   .market-stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); 
     gap: 30px;
   }
 }

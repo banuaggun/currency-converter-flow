@@ -22,7 +22,7 @@
   font-weight: 600;
   color: var(--text-primary);
   background-color: var(--bg-main);
-  border: 1px solid var(--border-light); 
+  border: 1px solid var(--border-light);  
   border-radius: 6px;
   cursor: pointer;
   outline: none;
@@ -31,20 +31,22 @@
 
 .compare-select:hover {
   border-color: var(--scrollbar-thumb);
-  background-color: var(--bg-main);
+  background-color: var(--bg-main); 
+  box-shadow: var(--shadow-graph);
 }
 
-.compare-select:focus {
-  border-color: var(--bg-row-selected); 
-  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.15); 
+.compare-select:focus, 
+.compare-select.active {
+  border-color: var(--bg-row-selected);  
+  background-color: #cdeaec; 
 }
 
 .compare-select option {
   font-weight: 500;
   color: var(--text-secondary);
-  background-color: var(--bg-main);
+  background-color: var(--bg-main); 
   padding: 8px; 
-}
+} 
  
 .compare-summary-text{
   color:var(--text-secondary);  
@@ -60,10 +62,16 @@ padding:2px 6px;
 
 .compare-summary-text span:nth-child(1){
   color:var(--text-primary); 
-  background-color: var(--bg-row-hover); 
+  background-color: #bfd4f5; 
+  box-shadow: var(--shadow-sm); 
+  padding:4px 12px; 
+  border-radius: 4px;
 } 
 
 .compare-summary-text span:nth-child(2){
-  color: var(--text-primary); 
-  background-color: var(--border-gray-hover); 
+  color: var(--text-secondary); 
+  background-color: var(--bg-main); 
+  border:1px solid var(--border-light); 
+  padding:4px 12px;   
+  border-radius: 4px;
 }

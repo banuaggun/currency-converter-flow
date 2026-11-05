@@ -3,7 +3,7 @@
   border-radius: 8px;
   border: 1px solid var(--border-light); 
   margin:30px auto 40px auto; 
-  width:100%; 
+  width:100%;  
 }
 
 .pairs-header {
@@ -35,11 +35,12 @@
   color:var(--text-muted); 
   text-transform: capitalize;
 }
- 
+
+
 .pairs-list-wrapper { 
   height:auto; 
-  padding: 0 16px;
- /* max-height: 380px; */ 
+  padding: 0 20px 0 12px;
+ /* max-height: 380px; */
   overflow-y: auto;
 }
 
@@ -72,7 +73,8 @@
 .pair-name {
   font-size: 16px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-primary); 
+  white-space: nowrap;
 }
 
 .pair-value {
@@ -81,14 +83,16 @@
   color: var(--text-primary);
   text-align: right;
   flex: 1;
-  padding-right: 2.5rem; 
+  padding-right: 2.5rem;  
+  white-space: nowrap;
 }
 
 .pair-percentage {
   font-size: 16px;
   font-weight: 700;
   width: 75px;
-  text-align: right;
+  text-align: right; 
+  white-space: nowrap;
 }
 
 .pair-percentage.positive {
@@ -97,9 +101,18 @@
 
 .pair-percentage.negative {
   color: #ef4444;
-}
- 
+} 
 
+@media only screen and (min-width:1201px) and (max-width:1400px){
+  .pairs-card{
+    display: flex; 
+    flex-direction: column;
+    align-items: stretch;
+  } 
+
+} 
+ 
+/*
 @media only screen and (min-width:601px) and (max-width:1020px){
   .pairs-card{
     width: calc(100% - 80px); 
@@ -129,4 +142,4 @@
   .pairs-header, .pairs-list-wrapper{
     padding: 8px 20px;
   }
-}
+} 

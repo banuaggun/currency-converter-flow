@@ -18,7 +18,7 @@
 } 
 
 .timeframe-btn{ 
-  border:1px solid var(--border-light);
+  border:1px solid var(--scrollbar-thumb);
   outline:0; 
   background-color: var(--bg-main);
   box-shadow: var(--shadow-lg);
@@ -31,10 +31,10 @@
 
 .timeframe-btn:hover, 
 .timeframe-btn.active{
-  border:1px solid var(--border-light); 
+  border:1px solid var(--scrollbar-thumb); 
   outline: 0;
   background-color: var(--bg-main); 
-  box-shadow: var(--shadow-stat);
+  box-shadow: var(--shadow-graph);
   color:var(--text-primary);
 } 
 
