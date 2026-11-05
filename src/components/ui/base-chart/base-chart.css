@@ -1,6 +1,6 @@
 .base-chart-container {
   margin-top: 30px;
-  padding: 16px 8px;
+  padding: 16px 12px;
   background-color: var(--bg-main); 
   border-radius: 8px;
   border: 1px solid var(--border-light); 
@@ -12,16 +12,18 @@
 
 .timeframe-selector{
   display: flex; 
-  justify-content: flex-start; 
+  justify-content: space-between; 
   gap:16px; 
   margin-bottom: 16px; 
 } 
 
 .timeframe-btn{ 
-  border:none; 
+  border:1px solid var(--border-light);
   outline:0; 
-  background-color: var(--border-light);
+  background-color: var(--bg-main);
+  box-shadow: var(--shadow-lg);
   padding:6px 12px; 
+  border-radius: 4px;
   font-size: 1rem; 
   font-weight: 700;  
   color:var(--text-muted);
@@ -29,9 +31,10 @@
 
 .timeframe-btn:hover, 
 .timeframe-btn.active{
-  border:none; 
+  border:1px solid var(--border-light); 
   outline: 0;
-  background-color: var(--bg-row-selected);
+  background-color: var(--bg-main); 
+  box-shadow: var(--shadow-stat);
   color:var(--text-primary);
 } 
 
@@ -46,4 +49,11 @@
   font-size: 16px; 
   font-weight:600;
   font-family: var(--font-main);
+}
+
+@media only screen and (min-width:601px){
+  .timeframe-selector{
+    justify-content: flex-end; 
+    padding-right:20px;
+  }
 }

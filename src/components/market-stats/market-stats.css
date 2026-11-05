@@ -1,65 +1,68 @@
 .market-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  margin-bottom: 16px;  
-} 
+  grid-template-columns: repeat(2, auto);
+  gap: 16px; 
+  margin:0 auto 16px auto; 
+}
 
 .market-stat {
-  background: var(--bg-main);  
-  box-shadow: var(--shadow-lg); 
-  border:1px solid var(--border-light);
-  color:var(--text-primary);
-  border-radius: 16px;
-  padding: 14px 18px;
+  background-color: var(--bg-stat);
+  box-shadow: var(--shadow-stat);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 14px 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 8px;
 }
 
 .market-stat-label {
+  font-family: var(--font-main);
   color: var(--text-muted);
   font-size: 16px;
-  font-weight: 500; 
+  font-weight: 700;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .market-stat-value {
   color: var(--text-secondary);
   font-size: 20px;
-  font-family: var(--font-family);
-  letter-spacing: 0.5px; 
+  font-family: var(--font-main);
+  letter-spacing: 0.5px;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .market-stat-change {
   font-size: 20px;
-  font-family: var(--font-family); 
-  letter-spacing: 0.5px; 
+  font-family: var(--font-main);
+  letter-spacing: 0.5px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .market-stat-change.positive {
-  color: var(--stats-positive); 
+  color: var(--stats-positive);
 }
 
 .market-stat-change.negative {
   color: var(--stats-negative);
 }
 
+@media only screen and (min-width: 601px) and (max-width: 1026px) {
+  .market-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+}
 
-@media only screen and (min-width:601px) and (max-width:1026px){
-  .market-stats{
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap:30px; 
-  } 
-} 
-
-@media only screen and (min-width:1027px) and (max-width:1426px){
-  .market-stats{
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap:30px; 
-  } 
+@media only screen and (min-width: 1027px) and (max-width: 1426px) {
+  .market-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
 }

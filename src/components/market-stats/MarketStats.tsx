@@ -1,4 +1,4 @@
-import './market-stats.css'; 
+import "./market-stats.css";
 
 interface MarketStatsProps {
   open: number;
@@ -15,16 +15,7 @@ export function MarketStats({ open, last }: MarketStatsProps) {
     <div className="market-stats">
       <div className="market-stat">
         <span className="market-stat-label">open</span>
-        <span className="market-stat-value">
-          {open.toFixed(4)}
-        </span>
-      </div>
-
-      <div className="market-stat">
-        <span className="market-stat-label">last</span>
-        <span className="market-stat-value">
-          {last.toFixed(4)}
-        </span>
+        <span className="market-stat-value">{open.toFixed(4)}</span>
       </div>
 
       <div className="market-stat">
@@ -32,11 +23,15 @@ export function MarketStats({ open, last }: MarketStatsProps) {
         <span
           className={`market-stat-change ${
             isPositive ? "positive" : "negative"
-          }`}
-        >
+          }`}>
           {isPositive ? "+" : ""}
           {change.toFixed(4)}
         </span>
+      </div>
+
+      <div className="market-stat">
+        <span className="market-stat-label">last</span>
+        <span className="market-stat-value">{last.toFixed(4)}</span>
       </div>
 
       <div className="market-stat">
@@ -44,10 +39,8 @@ export function MarketStats({ open, last }: MarketStatsProps) {
         <span
           className={`market-stat-change ${
             isPositive ? "positive" : "negative"
-          }`}
-        >
-          {isPositive ? "▲" : "▼"}{" "}
-          {isPositive ? "+" : ""}
+          }`}>
+          {isPositive ? "▲" : "▼"} {isPositive ? "+" : ""}
           {percentChange.toFixed(2)}%
         </span>
       </div>

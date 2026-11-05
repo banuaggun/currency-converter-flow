@@ -40,7 +40,7 @@ export function BaseChart({
   const svgHeight = 160;
 
   const paddingLeft = 75;
-  const paddingRight = 50;
+  const paddingRight = 25;
   const paddingTop = 15;
   const paddingBottom = 45; 
 
