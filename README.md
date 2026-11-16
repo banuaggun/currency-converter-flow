@@ -2,9 +2,12 @@
 
 A modern, fast, and responsive **Currency Converter** web application built with **React**, **TypeScript**, and **Redux Toolkit (RTK Query)**. The styling is crafted entirely using **Pure CSS** without any UI libraries, demonstrating a strong grip on vanilla layouts and smooth animations.
 
+🔗 **Live Demo:** [currency-converter-flow.vercel.app](https://currency-converter-flow.vercel.app/)
+
 ## ✨ Features
 
 - **Dynamic Currency Conversion:** Seamlessly convert between multiple global currencies with accurate rates.
+- **Historical Trends & Comparison:** Interactive SVG charts for tracking historical currency movements and comparing currency pairs side-by-side.
 - **Market Snapshot:** A dedicated dashboard displaying daily major currency pairs (EUR/USD, USD/JPY, GBP/USD, etc.).
 - **Smart UX Data Sync:** The application fetches official reference rates from the **European Central Bank (ECB)** via the Frankfurter API. It includes a dynamic `Last Updated` badge to communicate data freshness clearly to the user.
 - **Pure CSS Layouts & Animations:** Built completely with vanilla CSS, featuring custom responsive grids, flexbox alignments, smooth transitions, and tactile hover states.
@@ -31,7 +34,7 @@ Follow these steps to run the project locally:
 2. **Navigate into the project directory:**
 
    ```bash
-   cd YOUR_REPO_NAME
+   cd currency-converter-flow
    ```
 
 3. **Install dependencies:**
@@ -50,5 +53,9 @@ Follow these steps to run the project locally:
 
 ## 💡 Architecture & UX Decisions
 
-- **Handling Daily API Constraints:** The Frankfurter API updates its dataset once a day. Instead of forcing repetitive network requests with a traditional "Refresh" button that yields identical data, the UI was refactored to include a `Last Updated` badge. This provides a transparent UX, indicating exact data alignment with the European Central Bank's daily schedule.
-- **Pure CSS Approach:** Bypassing heavy frameworks like Tailwind or Component Libraries, this project relies purely on native CSS features like **CSS Variables (Custom Properties)** for easy theme management and custom timing functions for smooth visual feedback.
+- **Handling Daily API Constraints:** The Frankfurter API updates its dataset once a day. Instead of forcing repetitive network requests with a traditional "Refresh" button that yields identical data, the UI uses a `Last Updated` badge to communicate exact data alignment with the European Central Bank's daily schedule.
+- **Pure CSS & Custom SVG System:** Bypassing heavy frameworks like Tailwind or external icon libraries, this project relies on native CSS features (**CSS Variables**, **Flexbox**, **Grid**) and custom SVG icons/charts to maintain zero UI bundle overhead.
+- **Architecture Decision Records (ADR):** Key technical logs are documented in `docs/adr/`:
+  - [`0001 - State Management and Data Fetching via RTK Query`](./docs/adr/0001-state-management-and-data-fetching.md)
+  - [`0002 - Zero-Dependency Styling with Pure CSS & Custom SVG Components`](./docs/adr/0002-pure-css-and-custom-svg-components.md)
+- **Unit & Integration Diagnostics:** Core conversion logic and live API health checks are verified through diagnostic test suites in [`src/utils/math.test.ts`](./src/utils/math.test.ts).
