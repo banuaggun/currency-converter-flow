@@ -1,5 +1,5 @@
 .chart-header-group {
-  margin-bottom: 16px;
+  margin: 16px 0 16px 0;
 }
 
 .chart-content {
@@ -8,7 +8,7 @@
   gap: 6px;
 }
 
-.chart-title { 
+.chart-title {
   text-transform: uppercase;
   color: var(--text-secondary);
   letter-spacing: 0.8px;
@@ -16,62 +16,73 @@
 
 .compare-select {
   width: 100%;
-  max-width: 240px; 
-  padding: 8px 12px; 
-  font-size: 14px;
+  max-width: 240px;
+  padding: 8px 12px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
   background-color: var(--bg-main);
-  border: 1px solid var(--border-light);  
+  border: 1px solid var(--border-light);
   border-radius: 6px;
   cursor: pointer;
   outline: none;
   transition: all 0.2s ease;
+  font-family: var(--font-main);
 }
 
 .compare-select:hover {
   border-color: var(--scrollbar-thumb);
-  background-color: var(--bg-main); 
-  box-shadow: var(--shadow-graph);
+  background-color: var(--bg-main);
+  cursor: pointer;
+  outline: none;
 }
 
-.compare-select:focus, 
+.compare-select:focus,
 .compare-select.active {
-  border-color: var(--bg-row-selected);  
-  background-color: #cdeaec; 
+  border-color: var(--scrollbar-thumb);
+  background-color: var(--bg-row-selected);
+  cursor: pointer;
+  outline: none;
 }
 
 .compare-select option {
+  font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-  background-color: var(--bg-main); 
-  padding: 8px; 
-} 
- 
-.compare-summary-text{
-  color:var(--text-secondary);  
-  font-size: 16px; 
-  font-weight:500;
-} 
+  background-color: var(--bg-main);
+  padding: 8px;
+}
 
-.compare-summary-text span{
-padding:2px 6px; 
-  font-weight: 600; 
+.compare-summary-text {
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.compare-summary-text span {
+  padding: 2px 6px;
+  font-weight: 600;
   font-size: 18px;
 }
 
-.compare-summary-text span:nth-child(1){
-  color:var(--text-primary); 
-  background-color: #bfd4f5; 
-  box-shadow: var(--shadow-sm); 
-  padding:4px 12px; 
+.compare-summary-text span:nth-child(1) {
+  color: var(--bg-main);
+  background-color: var(--bg-stats);
+  padding: 4px 12px;
   border-radius: 4px;
-} 
+}
 
-.compare-summary-text span:nth-child(2){
-  color: var(--text-secondary); 
-  background-color: var(--bg-main); 
-  border:1px solid var(--border-light); 
-  padding:4px 12px;   
+.compare-summary-text span:nth-child(2) {
+  color: var(--text-secondary);
+  background-color: var(--border-gray-hover);
+  border: 1px solid var(--border-light);
+  padding: 4px 12px;
   border-radius: 4px;
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 4000px) {
+  .compare-wrapper {
+    width: 60%;
+  }
 }

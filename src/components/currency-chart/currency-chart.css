@@ -1,0 +1,25 @@
+@media only screen and (min-width: 1201px) and (max-width: 4000px) {
+  .chart-wrapper,
+  .compare-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .chart-stats {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chart-stats > div {
+    width: 100%;
+    max-width: none;
+  }
+  .chart-content-area,
+  .compare-wrapper {
+    width: 60%;
+  }
+}

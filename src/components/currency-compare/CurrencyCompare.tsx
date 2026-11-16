@@ -22,7 +22,7 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
     refetch,
   } = useGetChartRatesQuery(
     { base, quote: compareWith, days },
-    { skip: base === compareWith } 
+    { skip: base === compareWith },
   );
 
   if (isLoading && base !== compareWith) {
@@ -44,7 +44,9 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
   const lastIndex = chartData ? chartData.length - 1 : 0;
   const lastRate = chartData?.[lastIndex]?.rate || 0;
   const dailyOpenRate =
-    chartData && chartData.length > 1 ? chartData[lastIndex - 1].rate : lastRate;
+    chartData && chartData.length > 1
+      ? chartData[lastIndex - 1].rate
+      : lastRate;
 
   return (
     <div className="compare-container">
@@ -54,53 +56,51 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
         </div>
       )}
 
-      <div className="chart-header-group">
-        <div className="chart-content">
-          <h3 className="chart-title">COMPARE WITH:</h3>
-          <select
-            value={compareWith}
-            onChange={(e) => setCompareWith(e.target.value)}
-            className="compare-select">
-            {base !== "EUR" && <option value="EUR">EUR (Euro)</option>}
-            {base !== "USD" && <option value="USD">USD (Dolar)</option>}
-            {base !== "GBP" && <option value="GBP">GBP (Sterlin)</option>}
-            {base !== "JPY" && <option value="JPY">JPY (Yen)</option>}
-            {base !== "TRY" && <option value="TRY">TRY (Lira)</option>}
-            {base !== "AUD" && (
-              <option value="AUD">AUD (Australian Dollar)</option>
-            )}
-          </select>
-        </div>
-      </div>
-
-      {base === compareWith ? (
-        <div style={{ marginTop: "1rem" }}>
-          <Message
-            text="Please select a currency different from the base currency."
-            variant="info"
-          />
-        </div>
-      ) : (
-        <>
-          <div
-            className="compare-summary-text">
-            Showing relative performance of{" "}
-            <span>
-              {compareWith}
-            </span>{" "}
-            per <span style={{ color: "#000", fontWeight: "600" }}> {base}</span>{" "}
-            over the last {days} days.
+      <div className="compare-wrapper">
+        <div className="chart-header-group">
+          <div className="chart-content">
+            <h3 className="chart-title">COMPARE WITH:</h3>
+            <select
+              value={compareWith}
+              onChange={(e) => setCompareWith(e.target.value)}
+              className="compare-select">
+              {base !== "EUR" && <option value="EUR">EUR (Euro)</option>}
+              {base !== "USD" && <option value="USD">USD (Dolar)</option>}
+              {base !== "GBP" && <option value="GBP">GBP (Sterlin)</option>}
+              {base !== "JPY" && <option value="JPY">JPY (Yen)</option>}
+              {base !== "TRY" && <option value="TRY">TRY (Lira)</option>}
+              {base !== "AUD" && (
+                <option value="AUD">AUD (Australian Dollar)</option>
+              )}
+            </select>
           </div>
+        </div>
 
-          <BaseChart
-            data={chartData || []}
-            variant="area"
-            lineColor="#38bdf8"
-            currentDays={days}
-            onTimeframeChange={setDays}
-          />
-        </>
-      )}
+        {base === compareWith ? (
+          <div style={{ marginTop: "1rem" }}>
+            <Message
+              text="Please select a currency different from the base currency."
+              variant="info"
+            />
+          </div>
+        ) : (
+          <>
+            <div className="compare-summary-text">
+              Showing relative performance of <span>{compareWith}</span> per{" "}
+              <span style={{ color: "#000", fontWeight: "600" }}> {base}</span>{" "}
+              over the last {days} days.
+            </div>
+
+            <BaseChart
+              data={chartData || []}
+              variant="area"
+              lineColor="#38bdf8"
+              currentDays={days}
+              onTimeframeChange={setDays}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 }

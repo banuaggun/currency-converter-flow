@@ -1,59 +1,58 @@
 .base-chart-container {
   margin-top: 30px;
   padding: 16px 12px;
-  background-color: var(--bg-main); 
-  border-radius: 8px;
-  border: 1px solid var(--border-light); 
-  box-shadow: var(--shadow-lg); 
-  display: flex; 
-  flex-direction: column; 
-  gap:20px; 
-} 
-
-.timeframe-selector{
-  display: flex; 
-  justify-content: space-between; 
-  gap:16px; 
-  margin-bottom: 16px; 
-} 
-
-.timeframe-btn{ 
-  border:1px solid var(--scrollbar-thumb);
-  outline:0; 
   background-color: var(--bg-main);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
   box-shadow: var(--shadow-lg);
-  padding:6px 12px; 
-  border-radius: 4px;
-  font-size: 1rem; 
-  font-weight: 700;  
-  color:var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.timeframe-btn:hover, 
-.timeframe-btn.active{
-  border:1px solid var(--scrollbar-thumb); 
+.timeframe-selector {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.timeframe-btn {
+  border: 1px solid var(--scrollbar-thumb);
   outline: 0;
-  background-color: var(--bg-main); 
-  box-shadow: var(--shadow-graph);
-  color:var(--text-primary);
-} 
+  background-color: var(--bg-main);
+  box-shadow: var(--shadow-lg);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.timeframe-btn:hover,
+.timeframe-btn.active {
+  border: 1px solid var(--scrollbar-thumb);
+  outline: 0;
+  background-color: var(--bg-stats);
+  color: var(--bg-main);
+}
 
 .chart-grid-lines line {
   stroke: var(--scrollbar-thumb);
   stroke-width: 1;
-  stroke-dasharray: 8 8; 
+  stroke-dasharray: 8 8;
 }
 
-.chart-axis-y-text text, 
+.chart-axis-y-text text,
 .chart-axis-x-text text {
-  font-size: 16px; 
-  font-weight:600;
+  font-size: 16px;
+  font-weight: 600;
   font-family: var(--font-main);
 }
 
-@media only screen and (min-width:601px){
-  .timeframe-selector{
-    justify-content: flex-end; 
-    padding-right:20px;
+@media only screen and (min-width: 601px) {
+  .timeframe-selector {
+    justify-content: flex-end;
+    padding-right: 20px;
   }
 }
