@@ -58,4 +58,5 @@ Follow these steps to run the project locally:
 - **Architecture Decision Records (ADR):** Key technical logs are documented in `docs/adr/`:
   - [`0001 - State Management and Data Fetching via RTK Query`](./docs/adr/0001-state-management-and-data-fetching.md)
   - [`0002 - Zero-Dependency Styling with Pure CSS & Custom SVG Components`](./docs/adr/0002-pure-css-and-custom-svg-components.md)
+  - [`0003 - Lightweight Unit & Live API Integration Diagnostics`](./docs/adr/0003-lightweight-testing-and-live-api-diagnostics.md)
 - **Unit & Integration Diagnostics:** Core conversion logic and live API health checks are verified through diagnostic test suites in [`src/utils/math.test.ts`](./src/utils/math.test.ts).
