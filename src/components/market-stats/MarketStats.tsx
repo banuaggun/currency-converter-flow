@@ -1,4 +1,5 @@
 import "./market-stats.css";
+import { TrendUpIcon, TrendDownIcon } from "../ui/icons/icons";
 
 interface MarketStatsProps {
   open: number;
@@ -40,7 +41,8 @@ export function MarketStats({ open, last }: MarketStatsProps) {
           className={`market-stat-change ${
             isPositive ? "positive" : "negative"
           }`}>
-          {isPositive ? "▲" : "▼"} {isPositive ? "+" : ""}
+          {isPositive ? <TrendUpIcon size={20} /> : <TrendDownIcon size={20} />}{" "}
+          {isPositive ? "+" : ""}
           {percentChange.toFixed(2)}%
         </span>
       </div>

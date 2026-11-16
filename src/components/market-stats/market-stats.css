@@ -25,6 +25,13 @@
   font-family: var(--font-main);
 }
 
+.market-stat-change {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
 .market-stat-value,
 .market-stat-change {
   color: var(--bg-main);

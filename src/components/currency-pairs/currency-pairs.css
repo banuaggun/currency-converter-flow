@@ -88,6 +88,10 @@
 .pair-percentage {
   font-size: 13px;
   font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
 }
 
 .pair-percentage.positive {

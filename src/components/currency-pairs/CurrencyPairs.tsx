@@ -3,6 +3,7 @@ import {
   useGetLatestDateQuery,
 } from "../../store/pairsApi";
 import { Message } from "../ui/messages/Message";
+import { TrendUpIcon, TrendDownIcon } from "../ui/icons/icons";
 import "./currency-pairs.css";
 
 interface SnapshotPair {
@@ -70,9 +71,11 @@ export function CurrencyPairs() {
     <div className="pairs-card-ticker">
       <div className="pairs-ticker-header">
         <span className="ticker-title">MARKET SNAPSHOT</span>
-        <span className="ticker-date">Last Updated: {latestApiDate || "—"}</span>
+        <span className="ticker-date">
+          Last Updated: {latestApiDate || "—"}
+        </span>
       </div>
-      
+
       <div className="pairs-ticker-container">
         <div className="pairs-ticker-track">
           {doublePairs.map((pair, index) => {
@@ -114,12 +117,22 @@ export function CurrencyPairs() {
 
             return (
               <div key={index} className="ticker-item">
-                <span className="pair-name">{pair.base}/{pair.quote}</span>
+                <span className="pair-name">
+                  {pair.base}/{pair.quote}
+                </span>
                 <span className="pair-value">
                   {currentPairRate !== null ? currentPairRate.toFixed(4) : "—"}
                 </span>
-                <span className={`pair-percentage ${isPositive ? "positive" : "negative"}`}>
-                  {isPositive ? `▲ +${percentageValue}%` : `▼ -${percentageValue}%`}
+                <span
+                  className={`pair-percentage ${isPositive ? "positive" : "negative"}`}>
+                  {isPositive ? (
+                    <TrendUpIcon size={20} />
+                  ) : (
+                    <TrendDownIcon size={20} />
+                  )}
+                  {isPositive
+                    ? ` +${percentageValue}%`
+                    : ` -${percentageValue}%`}
                 </span>
               </div>
             );

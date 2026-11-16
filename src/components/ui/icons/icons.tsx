@@ -131,13 +131,35 @@ export const CheckIcon: React.FC<IconProps> = ({
       {...props}
       viewBox="0 0 24 24"
       fill="none"
-      stroke="currentColor" 
-      strokeWidth="3.5"     
+      stroke="currentColor"
+      strokeWidth="3.5"
       strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+      strokeLinejoin="round">
       <path d="M4.5 12.5L9.5 17.5C11.5 13.5 15.5 8 20 4.5" />
     </svg>
   );
 };
 
+export const TrendUpIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = "currentColor",
+  ...props
+}) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} {...props}>
+      <path d="M12 5L21 19H3L12 5Z" />
+    </svg>
+  );
+};
+
+export const TrendDownIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = "currentColor",
+  ...props
+}) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} {...props}>
+      <path d="M12 19L21 5H3L12 19Z" />
+    </svg>
+  );
+};
