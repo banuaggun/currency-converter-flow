@@ -77,7 +77,7 @@ export function CurrencyCompare({ base }: CurrencyCompareProps) {
         </div>
 
         {base === compareWith ? (
-          <div style={{ marginTop: "1rem" }}>
+          <div className="compare-empty-state">
             <Message
               text="Please select a currency different from the base currency."
               variant="info"

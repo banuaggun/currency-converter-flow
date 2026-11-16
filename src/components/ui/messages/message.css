@@ -3,58 +3,80 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  min-height: 140px;
+  padding: 28px 32px;
+  margin: 32px auto;
+  border-radius: 10px;
+  transition: all 0.2s ease;
 }
 
+.message-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-text {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+}
+
+.message-container.variant-info,
 .message-container.variant-error {
-  background-color: #fef2f2;
-  border: 1px solid #fee2e2;
-  color: #b91c1c;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.message-container.variant-info .message-icon {
+  color: var(--bg-stat);
+  background-color: var(--bg-main);
+  padding: 10px;
 }
 
 .message-container.variant-error .message-icon {
-  color: #ef4444;
-  font-size: 1.5rem;
+  color: var(--pair-negative);
+  background-color: var(--bg-main);
+  padding: 10px;
 }
 
 .message-container.variant-loading {
   background-color: transparent;
-  color: var(--accent-color, #3b82f6);
-}
-.message-container.variant-loading .message-spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-top-color: currentColor;
-  border-radius: 50%;
-  animation: message-spin 1s linear infinite;
+  color: var(--bg-stat);
 }
 
-.message-container.variant-info {
-  background-color: #eff6ff;
-  border: 1px solid #dbeafe;
-  color: #1e40af;
+.message-container.variant-loading .message-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--border-light);
+  border-top-color: var(--text-primary);
+  border-radius: 50%;
+  animation: message-spin 0.8s linear infinite;
 }
 
 .message-retry-btn {
-  background-color: #ef4444;
-  color: white;
+  margin-top: 4px;
+  background-color: var(--pair-negative);
+  color: var(--bg-main);
   border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 500;
+  padding: 6px 12px;
+  font-family: var(--font-main);
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
 .message-retry-btn:hover {
-  background-color: #dc2626;
+  background-color: var(--stats-negative);
 }
 
 @keyframes message-spin {

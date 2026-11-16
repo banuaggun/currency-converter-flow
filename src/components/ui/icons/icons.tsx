@@ -163,3 +163,51 @@ export const TrendDownIcon: React.FC<IconProps> = ({
     </svg>
   );
 };
+
+export const InfoIcon: React.FC<IconProps> = ({
+  size = 20,
+  color = "currentColor",
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://w3.org"
+      viewBox="0 0 256 256"
+      width={size}
+      height={size}
+      fill="none"
+      stroke={color}
+      strokeWidth="20"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}>
+      <circle cx="128" cy="128" r="96" />
+      <path d="M120,120a8,8,0,0,1,8,8v40a8,8,0,0,0,8,8" />
+      <circle cx="124" cy="84" r="12" fill={color} stroke="none" />
+    </svg>
+  );
+};
+
+export const WarningIcon: React.FC<IconProps> = ({
+  size = 20,
+  color = "currentColor",
+  ...props
+}) => {
+  return (
+    <svg
+      xmlns="http://w3.org"
+      viewBox="0 0 256 256"
+      width={size}
+      height={size}
+      fill="none"
+      stroke={color}
+      strokeWidth="20"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}>
+      <path d="M114.15,39.89l-88,152A16,16,0,0,0,40,216H216a16,16,0,0,0,13.85-24.11l-88-152A16,16,0,0,0,114.15,39.89Z" />
+      <line x1="128" y1="104" x2="128" y2="144" />
+      <circle cx="128" cy="176" r="12" fill={color} stroke="none" />
+    </svg>
+  );
+};

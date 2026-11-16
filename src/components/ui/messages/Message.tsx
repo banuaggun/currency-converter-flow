@@ -1,3 +1,4 @@
+import { InfoIcon, WarningIcon } from "../icons/icons";
 import "./message.css";
 
 interface MessageProps {
@@ -30,13 +31,13 @@ export function Message({ text, variant = "info", onRetry }: MessageProps) {
 
       {variant === "error" && (
         <div className="message-icon" aria-hidden="true">
-          ⚠️
+          <WarningIcon size={28} />
         </div>
       )}
 
       {variant === "info" && (
         <div className="message-icon" aria-hidden="true">
-          ℹ️
+          <InfoIcon size={28} />
         </div>
       )}
 
